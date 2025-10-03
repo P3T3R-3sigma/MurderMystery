@@ -1,0 +1,8 @@
+{
+    "title": "MurderMystery",
+    "identifier": "com.yourcompany.wizardEVAP.MurderMystery",
+    "orientation": "landscape",
+    "versioncode": 1,
+    "versionname": "1.0.0",
+    "stage": "test"
+}
