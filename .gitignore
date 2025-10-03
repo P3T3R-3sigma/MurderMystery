@@ -1,0 +1,5 @@
+*
+!qml/
+!main.cpp
+!CMakeLists.txt
+!.gitignore
