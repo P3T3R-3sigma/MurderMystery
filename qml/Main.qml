@@ -4,6 +4,9 @@ import QtQuick 2.0
 import "MainLibrary/Characters"
 import "MainLibrary/Items"
 import "MainLibrary/Managers"
+import "MainLibrary/Views/BigStorageRoom"
+import "MainLibrary/Views/ChangingRoom"
+import "MainLibrary/Puzzle/MagnetHook"
 
 GameWindow {
     id: gameWindow
@@ -28,8 +31,10 @@ GameWindow {
         id: scene
 
         // the "logical size" - the scene content is auto-scaled to match the GameWindow size
-        width: 2000
-        height: 400
+        width: 1920
+        height: 1080
+
+        property var mCurrentScene
 
 
         MainManager { id: mMainManager }
@@ -66,5 +71,19 @@ GameWindow {
         SideSafeGear { id: mSideSafeGear; pAvailable: true }
         String { id: mString; pAvailable: true }
 
+        // MagnetHookGame {}
+
+        BigStorageRoom {
+            id: mBigStorageRoom
+
+            pImageSource: "BigStorageRoom.png"
+        }
+        ChangingRoom {
+            id: mChangingRoom
+
+            pImageSource: "ChangingRoom.png"
+        }
+
+        Component.onCompleted: mChangingRoom.startFadeIn()
     }
 }
