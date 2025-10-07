@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 BaseItem {
-    id: closetAngel
+    id: iIron
 
     visible: true
 

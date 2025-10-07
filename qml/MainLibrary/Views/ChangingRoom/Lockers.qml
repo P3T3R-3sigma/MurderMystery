@@ -13,7 +13,7 @@ BaseView {
     property bool pCandeeOpen: false
 
     pImageSource: "Lockers.png"
-    pNextView: mChangingRoom
+    pBackView: mChangingRoom
 
 
     NavigationRect {
@@ -64,7 +64,7 @@ BaseView {
         widthPercent: 0.04
         heightPercent: 0.12
         pEnabled: pMilanOpen
-        functionOnClicked: function() {iLockerMilan.startFadeIn() }
+        functionOnClicked: function() {mLockerMilan.startFadeIn() }
     }
     NavigationRect {
         id: iCandeeLocker
@@ -91,11 +91,14 @@ BaseView {
         widthPercent: 0.04
         heightPercent: 0.12
         pEnabled: pAngelOpen
-        functionOnClicked: function() {pAngelOpen = true }
+        functionOnClicked: function() {mLockerAngel.startFadeIn() }
     }
 
     LockerMilan {
-        id: iLockerMilan
+        id: mLockerMilan
+    }
+    LockerAngel {
+        id: mLockerAngel
     }
 
 

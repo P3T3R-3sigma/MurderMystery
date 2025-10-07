@@ -6,6 +6,9 @@ import "MainLibrary/Items"
 import "MainLibrary/Managers"
 import "MainLibrary/Views/BigStorageRoom"
 import "MainLibrary/Views/ChangingRoom"
+import "MainLibrary/Views/VIP_Alcove"
+import "MainLibrary/Views/MakeUpRoom"
+import "MainLibrary/Views/BossRoom"
 import "MainLibrary/Puzzle/MagnetHook"
 
 GameWindow {
@@ -34,7 +37,8 @@ GameWindow {
         width: 1920
         height: 1080
 
-        property var mCurrentScene
+        property var mCurrentScene: null
+        property bool mEnabled: true
 
 
         MainManager { id: mMainManager }
@@ -51,39 +55,25 @@ GameWindow {
 
         ItemManager { id: mItemManager }
 
-        ClosetAngel { id: mClosetAngel; pAvailable: true }
-        ClosetHeart { id: mClosetHeart; pAvailable: true }
-        ClosetMilan { id: mClosetMilan; pAvailable: true }
-        DiaryAngel { id: mDiaryAngel;}
-        DiaryMilan { id: mDiaryMilan;}
-        ExtensionCable { id: mExtensionCable;}
-        Fridge { id: mFridge; pAvailable: true }
-        Iron { id: mIron; pAvailable: true }
-        KeyBlue { id: mKeyBlue;}
-        KeyFrozen { id: mKeyFrozen;}
-        KeyGreen { id: mKeyGreen;}
-        KeyRed { id: mKeyRed;}
-        Magnet { id: mMagnet; pAvailable: true }
-        MagnetHook { id: mMagnetHook;}
-        MainSafe { id: mMainSafe;}
-        MoneyOfAmy { id: mMoneyOfAmy;}
-        SideSafe { id: mSideSafe;}
-        SideSafeGear { id: mSideSafeGear; pAvailable: true }
-        String { id: mString; pAvailable: true }
+        ExtensionCable { id: mExtensionCable }
+        Iron { id: mIron }
+        KeyBlue { id: mKeyBlue }
+        KeyFrozen { id: mKeyFrozen }
+        KeyGreen { id: mKeyGreen }
+        MagnetHook { id: mMagnetHook }
+        MoneyOfAmy { id: mMoneyOfAmy }
+        SideSafeGear { id: mSideSafeGear }
 
         // MagnetHookGame {}
 
-        BigStorageRoom {
-            id: mBigStorageRoom
-
-            pImageSource: "BigStorageRoom.png"
-        }
-        ChangingRoom {
-            id: mChangingRoom
-
-            pImageSource: "ChangingRoom.png"
+        PlaceManager {
+            id: mPlaceManager
         }
 
-        Component.onCompleted: mChangingRoom.startFadeIn()
+        BigStorageRoom { id: mBigStorageRoom }
+        ChangingRoom { id: mChangingRoom }
+        VIP_Alcove { id: mVIP_Alcove }
+        MakeUpRoom { id: mMakeUpRoom }
+        BossRoom { id: mBossRoom }
     }
 }

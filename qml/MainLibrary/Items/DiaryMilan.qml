@@ -1,20 +1,12 @@
 import QtQuick 2.0
 
 BaseItem {
-    id: closetAngel
+    id: milanDiary
 
-    visible: true
-
-    pXYWH: [1100, 150, 50, 50]
+    pXYWH: [1100, 50, 50, 50]
     pColor: "red"
     pName: "Diary Milan"
-
-    function updateItem() {
-        if (mClosetMilan.pPickedUp) {
-            pAvailable = true
-        }
-        setVisual()
-    }
+    pSource: "Diary.png"
 
     function onPickUp() {
         mMilan.makeVideo2Available()

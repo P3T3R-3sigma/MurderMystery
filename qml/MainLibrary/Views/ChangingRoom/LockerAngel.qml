@@ -6,26 +6,17 @@ import "../../Controll"
 import "../../Items"
 
 BaseView {
-    id: iMilanLocker
+    id: iAngelLocker
 
-    pImageSource: "LockerMilan.png"
+    pImageSource: "LockerAngel.png"
     pBackView: mLocker
 
-    DiaryMilan {
+    DiaryAngel {
         xPercent: 0.5
         yPercent: 0.6
         widthPercent: 0.1
         heightPercent: 0.1
     }
-    String {
-        xPercent: 0.63
-        yPercent: 0.6
-        widthPercent: 0.1
-        heightPercent: 0.1
-    }
-
-
-
 }
 
 

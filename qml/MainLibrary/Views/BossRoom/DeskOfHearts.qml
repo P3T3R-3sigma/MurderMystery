@@ -1,123 +1,100 @@
 import QtQuick
 import Felgo
-import QtMultimedia
 
-Item {
-    id: mLoader
+import "../"
+import "../../Controll"
+import "../../Items"
 
-    anchors.fill: parent
+BaseView {
+    id: iDeskOfHeart
 
-    property real mVolume: 0
-    property string mSource
-    property real videoAspect: 16/9
-    property real containerAspect: width / height
-    property real scaledVideoWidth: containerAspect > videoAspect ? height * videoAspect : width
-    property real scaledVideoHeight: containerAspect > videoAspect ? height : width / videoAspect
-    property bool pAvailable: false
-    property bool pVisited: false
+    pImageSource: "DeskOfHeart.png"
+    pBackView: mBossRoom
 
-    signal sVideoEnd()
+    property bool pRightOpen: false
+    property bool pLeftOpen: false
+    property bool pSafeOpen: false
 
-    visible: false
-
-    VideoOutput {
-        id: mVideoOutput
-
-        fillMode: VideoOutput.PreserveAspectFit
-
-        anchors.fill: parent
-        transform: [
-            Scale {
-                id: mVideoOutputScale
-                origin.x: width / 2
-                origin.y: height / 2
-                xScale: 1.0
-                yScale: 1.0
-            }
-        ]
+    NavigationRect {
+        id: closeLeft
+        xPercent: 0.14
+        yPercent: 0.63
+        widthPercent: 0.05
+        heightPercent: 0.3
+        pEnabled: pLeftOpen
+        functionOnClicked: function() {pLeftOpen = false; calculateImage()}
+    }
+    NavigationRect {
+        id: closeRight
+        xPercent: 0.87
+        yPercent: 0.63
+        widthPercent: 0.08
+        heightPercent: 0.3
+        pEnabled: pRightOpen
+        functionOnClicked: function() {pRightOpen = false; calculateImage()}
+    }
+    NavigationRect {
+        id: openLeft
+        xPercent: 0.19
+        yPercent: 0.58
+        widthPercent: 0.13
+        heightPercent: 0.3
+        pEnabled: !pLeftOpen
+        functionOnClicked: function() {pLeftOpen = true; calculateImage()}
+    }
+    NavigationRect {
+        id: openRight
+        xPercent: 0.76
+        yPercent: 0.58
+        widthPercent: 0.11
+        heightPercent: 0.3
+        pEnabled: !pRightOpen
+        functionOnClicked: function() {pRightOpen = true; calculateImage()}
+    }
+    NavigationRect {
+        id: searchSafe
+        xPercent: 0.77
+        yPercent: 0.69
+        widthPercent: 0.093
+        heightPercent: 0.18
+        pEnabled: pRightOpen && pSafeOpen
+        functionOnClicked: function() { mMainSafe.startFadeIn() }
+    }
+    NavigationRect {
+        id: openSafe
+        xPercent: 0.77
+        yPercent: 0.69
+        widthPercent: 0.095
+        heightPercent: 0.18
+        pEnabled: pRightOpen && !pSafeOpen
+        functionOnClicked: function() {pSafeOpen = true; calculateImage()}
     }
 
-    MediaPlayer {
-        id: mVideoMediaPlayer
+    MainSafe {
+        id: mMainSafe
+    }
 
-        // source: mSource
-        videoOutput: mVideoOutput
-        loops: MediaPlayer.Infinite
-        audioOutput: AudioOutput {
-            volume: mVolume
+    function calculateImage() {
+        if (pRightOpen && pLeftOpen && !pSafeOpen) {
+            pImageSource = "DeskOfHeartBothOpenSafeClosed.png"
         }
-        onPlaybackStateChanged: {
-            ///////////////////////////////
-            // console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration, "now:", Date.now())
-            ///////////////////////////////
-            if (mediaStatus === MediaPlayer.EndOfMedia) {
-                sVideoEnd()
-                ///////////////////////////////
-                // console.log("End of media reached.")
-                ///////////////////////////////
-            } else if (mediaStatus === MediaPlayer.LoadedMedia) {
-                ///////////////////////////////
-                // console.log("Loaded", Date.now())
-                ///////////////////////////////
-            }
+        if (pRightOpen && pLeftOpen && pSafeOpen) {
+            pImageSource = "DeskOfHeartBothOpenSafeOpen.png"
         }
-    }
-
-
-    onVisibleChanged: {
-        if (visible) {
-            mVideoMediaPlayer.play()
-        } else {
-            mVideoMediaPlayer.stop()
+        else if (!pRightOpen && !pLeftOpen) {
+            pImageSource = "DeskOfHeart.png"
         }
-    }
-
-
-    function onInteract() {
-        sVideoEnd()
-    }
-
-    function startVideo(){
-        setVideoPosition(0)
-        mVideoMediaPlayer.play()
-    }
-    function stopVideo(){
-        mVideoMediaPlayer.stop()
-    }
-    function pauseVideo(){
-        mVideoMediaPlayer.pause()
-    }
-    function playVideo(){
-        mVideoMediaPlayer.play()
-    }
-
-    function getVideoOutputScale() {
-        return mVideoOutputScale
-    }
-    function getVideoOutput() {
-        return mVideoOutput
-    }
-    function getMediaPlayer() {
-        return mVideoMediaPlayer
-    }
-
-
-    function getVideoState() {
-        return mVideoMediaPlayer.playbackState
-    }
-    function getVideoDuration() {
-        return mVideoMediaPlayer.duration
-    }
-
-    function getVideoSource() {
-        return mSource
-    }
-    function getVideoPosition() {
-        return mVideoMediaPlayer.position
-    }
-    function setVideoPosition(sPosition) {
-        mVideoMediaPlayer.position = sPosition
+        else if (!pRightOpen && pLeftOpen) {
+            pImageSource = "DeskOfHeartLeftOpen.png"
+        }
+        else if (pRightOpen && !pLeftOpen && !pSafeOpen) {
+            pImageSource = "DeskOfHeartRightOpenSafeClosed.png"
+        }
+        else if (pRightOpen && !pLeftOpen && pSafeOpen) {
+            pImageSource = "DeskOfHeartRightOpenSafeOpen.png"
+        }
+        else {
+            console.log("ERROR:" + this)
+        }
     }
 }
-
-

@@ -6,6 +6,9 @@ import "../"
 
 BaseView {
     id: iChangingRoom
+    objectName: "Changing Room"
+    pImageSource: "ChangingRoom.png"
+    pBackView: mMakeUpRoom
 
     NavigationRect {
         xPercent: 0
@@ -19,5 +22,6 @@ BaseView {
         id: mLocker
     }
 
+    Component.onCompleted: mPlaceManager.addPlace(this)
 
 }

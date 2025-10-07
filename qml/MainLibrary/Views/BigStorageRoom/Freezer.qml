@@ -3,12 +3,13 @@ import Felgo
 
 import "../"
 import "../../Controll"
+import "../../Items"
 
 BaseView {
     id: iFreezer
 
     pImageSource: "FreezerBothClosed.png"
-    pNextView: iBigStorageRoom
+    pBackView: iBigStorageRoom
 
     property bool pFreezerOpen: false
     property bool pFridgeOpen: false
@@ -51,14 +52,13 @@ BaseView {
         pEnabled: !pFreezerOpen
         functionOnClicked: function() {pFreezerOpen = true; calculateImage()}
     }
-    NavigationRect {
-        id: takeMagnet
+    Magnet {
+        id: mMagnet
         xPercent: 0.35
         yPercent: 0.285
         widthPercent: 0.02
         heightPercent: 0.05
-        pEnabled: !pFridgeOpen && !pMagnetTaken
-        functionOnClicked: function() {pMagnetTaken = true; calculateImage()}
+        visible: !pPickedUp && !pFridgeOpen
     }
     NavigationRect {
         id: takeKey
@@ -68,15 +68,6 @@ BaseView {
         heightPercent: 0.15
         pEnabled: pFreezerOpen && !pKeyTaken
         functionOnClicked: function() {pKeyTaken = true; calculateImage()}
-    }
-    Rectangle {
-        id: iMagnetMask
-        visible: !pFridgeOpen && pMagnetTaken
-
-        x:  parent.width * 0.35
-        y:  parent.height * 0.285
-        width: parent.width * 0.02
-        height: parent.height * 0.05
     }
 
     function calculateImage() {

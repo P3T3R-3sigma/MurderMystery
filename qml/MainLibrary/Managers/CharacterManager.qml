@@ -4,6 +4,7 @@ import "../Videos"
 
 Item {
     id: iCharacterManager
+    anchors.fill: parent
 
     property var pCharacters: []
 
@@ -22,6 +23,7 @@ Item {
             pCharacters[i].setNextAvailable()
         }
     }
+
 
     Component.onCompleted: mMainManager.addManager(iCharacterManager)
 }

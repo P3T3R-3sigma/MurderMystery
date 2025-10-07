@@ -3,45 +3,29 @@ import Felgo
 
 import "../Interact"
 
-InteractItem {
+Rectangle {
     id: baseItem
 
     property var pXYWH: [100, 100, 100, 100]
     property string pColor: "red"
     property string pName: ""
 
-
     property real xPercent
     property real yPercent
     property real widthPercent
     property real heightPercent
 
-    property bool pAvailable: false
+    property string pSource: ""
+
     property bool pPickedUp: false
 
-    // Rectangle {
-    //     id: body
+    x: parent.width * xPercent
+    y: parent.height * yPercent
+    width:  parent.width * widthPercent
+    height: parent.height * heightPercent
 
-    //     x: pXYWH[0]
-    //     y: pXYWH[1]
-    //     width: pXYWH[2]
-    //     height: pXYWH[3]
-    //     color: pColor
-
-    //     Text {
-    //         anchors.fill: parent
-
-    //         text: pName
-    //         wrapMode: Text.WordWrap
-    //     }
-
-    //     MouseArea {
-    //         anchors.fill: parent
-    //         onClicked: {
-    //             interact(baseItem)
-    //         }
-    //     }
-    // }
+    color: "transparent"
+    visible: !pPickedUp
 
 
     AppImage {
@@ -94,8 +78,6 @@ InteractItem {
     function setVisual() {
         if (pPickedUp) {
             pColor = "blue"
-        } else if (pAvailable) {
-            pColor = "green"
         } else {
             pColor = "red"
         }

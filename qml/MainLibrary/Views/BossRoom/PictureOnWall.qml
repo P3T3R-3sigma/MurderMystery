@@ -1,123 +1,76 @@
 import QtQuick
 import Felgo
-import QtMultimedia
 
-Item {
-    id: mLoader
+import "../"
+import "../../Controll"
+import "../../Items"
 
-    anchors.fill: parent
+BaseView {
+    id: iSideSafePicture
 
-    property real mVolume: 0
-    property string mSource
-    property real videoAspect: 16/9
-    property real containerAspect: width / height
-    property real scaledVideoWidth: containerAspect > videoAspect ? height * videoAspect : width
-    property real scaledVideoHeight: containerAspect > videoAspect ? height : width / videoAspect
-    property bool pAvailable: false
-    property bool pVisited: false
+    pImageSource: "PictureOnTheWallFront.png"
+    pBackView: mBossRoom
 
-    signal sVideoEnd()
+    property bool pPictureOpen: false
+    property bool pSafeOpen: false
+    property bool pSideView: false
 
-    visible: false
-
-    VideoOutput {
-        id: mVideoOutput
-
-        fillMode: VideoOutput.PreserveAspectFit
-
-        anchors.fill: parent
-        transform: [
-            Scale {
-                id: mVideoOutputScale
-                origin.x: width / 2
-                origin.y: height / 2
-                xScale: 1.0
-                yScale: 1.0
-            }
-        ]
+    NavigationRect {
+        id: safeSideView
+        xPercent: 0.63
+        yPercent: 0.1
+        widthPercent: 0.02
+        heightPercent: 0.7
+        pEnabled: !pPictureOpen && !pSideView
+        functionOnClicked: function() { pSideView = true; calculateImage()}
+    }
+    NavigationRect {
+        id: pushButton
+        xPercent: 0.474
+        yPercent: 0.584
+        widthPercent: 0.01
+        heightPercent: 0.02
+        pEnabled: pSideView
+        functionOnClicked: function() {pPictureOpen = true; pSideView = false; calculateImage()}
+    }
+    NavigationRect {
+        id: openSafe
+        xPercent: 0.39
+        yPercent: 0.31
+        widthPercent: 0.17
+        heightPercent: 0.28
+        pEnabled: !pSafeOpen && pPictureOpen
+        functionOnClicked: function() {pSafeOpen = true; calculateImage()}
+    }
+    NavigationRect {
+        id: searchSafe
+        xPercent: 0.39
+        yPercent: 0.31
+        widthPercent: 0.17
+        heightPercent: 0.28
+        pEnabled: pSafeOpen
+        functionOnClicked: function() { mSideSafe.startFadeIn() }
     }
 
-    MediaPlayer {
-        id: mVideoMediaPlayer
+    SideSafe {
+        id: mSideSafe
+    }
 
-        // source: mSource
-        videoOutput: mVideoOutput
-        loops: MediaPlayer.Infinite
-        audioOutput: AudioOutput {
-            volume: mVolume
+    function calculateImage() {
+        if (pSafeOpen) {
+            pImageSource = "SafeOnTheWallOpen.png"
         }
-        onPlaybackStateChanged: {
-            ///////////////////////////////
-            // console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration, "now:", Date.now())
-            ///////////////////////////////
-            if (mediaStatus === MediaPlayer.EndOfMedia) {
-                sVideoEnd()
-                ///////////////////////////////
-                // console.log("End of media reached.")
-                ///////////////////////////////
-            } else if (mediaStatus === MediaPlayer.LoadedMedia) {
-                ///////////////////////////////
-                // console.log("Loaded", Date.now())
-                ///////////////////////////////
-            }
+        else if (pPictureOpen && !pSafeOpen) {
+            pImageSource = "PictureOnTheWallOpen.png"
         }
-    }
-
-
-    onVisibleChanged: {
-        if (visible) {
-            mVideoMediaPlayer.play()
-        } else {
-            mVideoMediaPlayer.stop()
+        else if (!pPictureOpen && pSideView) {
+            pImageSource = "PictureOnTheWallSide.png"
         }
-    }
-
-
-    function onInteract() {
-        sVideoEnd()
-    }
-
-    function startVideo(){
-        setVideoPosition(0)
-        mVideoMediaPlayer.play()
-    }
-    function stopVideo(){
-        mVideoMediaPlayer.stop()
-    }
-    function pauseVideo(){
-        mVideoMediaPlayer.pause()
-    }
-    function playVideo(){
-        mVideoMediaPlayer.play()
-    }
-
-    function getVideoOutputScale() {
-        return mVideoOutputScale
-    }
-    function getVideoOutput() {
-        return mVideoOutput
-    }
-    function getMediaPlayer() {
-        return mVideoMediaPlayer
-    }
-
-
-    function getVideoState() {
-        return mVideoMediaPlayer.playbackState
-    }
-    function getVideoDuration() {
-        return mVideoMediaPlayer.duration
-    }
-
-    function getVideoSource() {
-        return mSource
-    }
-    function getVideoPosition() {
-        return mVideoMediaPlayer.position
-    }
-    function setVideoPosition(sPosition) {
-        mVideoMediaPlayer.position = sPosition
+        else if (!pPictureOpen && !pSideView) {
+            pImageSource = "PictureOnTheWall.png"
+        }
+        else {
+            console.log("ERROR:" + this)
+        }
     }
 }
-
-

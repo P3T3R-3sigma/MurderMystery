@@ -1,10 +1,10 @@
 import QtQuick 2.0
 
 BaseItem {
-    id: iString
+    id: iMurderVideo
 
     pXYWH: [1600, 50, 50, 50]
     pColor: "red"
     pName: "String"
-    pSource: "String.png"
+    pSource: "MurderVideo.png"
 }

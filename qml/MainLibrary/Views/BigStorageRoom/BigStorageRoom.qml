@@ -6,6 +6,9 @@ import "../"
 
 BaseView {
     id: iBigStorageRoom
+    objectName: "Big Storage Room"
+
+    pImageSource: "BigStorageRoom.png"
 
     NavigationRect {
         xPercent: 0.73
@@ -29,5 +32,7 @@ BaseView {
     // StorageTable {
     //     id: mStorageTable
     // }
+
+    Component.onCompleted: mPlaceManager.addPlace(this)
 
 }

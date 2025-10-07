@@ -1,11 +1,10 @@
 import QtQuick 2.0
 
 BaseItem {
-    id: closetAngel
-
-    visible: true
+    id: redKey
 
     pXYWH: [1700, 50, 50, 50]
     pColor: "red"
     pName: "Key Red"
+    pSource: "RedKey.png"
 }

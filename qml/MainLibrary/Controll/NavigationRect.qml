@@ -37,6 +37,7 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
+            enabled: scene.mEnabled
 
             onEntered: {
                 navRect.opacity = 0.5
@@ -46,8 +47,8 @@ Rectangle {
             }
             onClicked: {
                 if (functionOnClicked) {
-                    console.log(scene.mCurrentScene, iNavigationRect.parent)
                     if (scene.mCurrentScene === iNavigationRect.parent) {
+                        console.log(scene.mCurrentScene, iNavigationRect.parent)
                         functionOnClicked()
                     }
                 }

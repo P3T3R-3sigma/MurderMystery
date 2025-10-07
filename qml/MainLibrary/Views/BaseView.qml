@@ -8,6 +8,7 @@ Item {
 
     property string pImageSource: ""
     property var pNextView: null
+    property var pBackView: null
 
     visible: false
     anchors.fill: parent
@@ -27,7 +28,7 @@ Item {
         heightPercent: 0.2
         pEnabled: baseView === scene.mCurrentScene
         functionOnClicked: function() {
-            startFadeOut(pNextView)
+            startFadeOut(pBackView)
         }
     }
 
@@ -41,9 +42,23 @@ Item {
             target: baseView
             property: "opacity"
             duration: 500
+
+        }
+        onFinished: {
+            if (baseView.opacity === 0) {
+                baseView.visible = false
+                if (pNextView) {
+                    pNextView.startFadeIn()
+                } else {
+                    scene.mEnabled = true
+                }
+            } else {
+                scene.mEnabled = true
+            }
         }
     }
     function startFadeOut(lNext) {
+        scene.mEnabled = false
         pNextView = lNext
         scene.mCurrentScene = pNextView
         iNumberAnimationOpacity.to = 0
