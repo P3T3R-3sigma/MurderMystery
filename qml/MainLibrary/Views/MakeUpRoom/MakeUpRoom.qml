@@ -8,6 +8,7 @@ BaseView {
     id: iMakeUpRoom
     objectName: "MakeUp Room"
     pImageSource: "MakeUpRoom.png"
+    pBackView: mSideView
 
     NavigationRect {
         xPercent: 0.03

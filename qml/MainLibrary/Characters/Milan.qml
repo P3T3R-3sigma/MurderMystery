@@ -7,7 +7,7 @@ BaseCharacter {
 
     visible: true
 
-    pXYWH: [700, 50, 50, 50]
+    pXYWH: [920, 500, 200, 200]
     pColor: "red"
     pName: "Milan"
     pListVideos: [iMilanVideo1, iMilanVideo2, iMilanVideo3]
@@ -20,6 +20,7 @@ BaseCharacter {
     BasicVideo {
         id: iMilanVideo2
         objectName: "Milan: Confront"
+        pAvailable: mConstants.milanBlackmailSeen
     }
     BasicVideo {
         id: iMilanVideo3

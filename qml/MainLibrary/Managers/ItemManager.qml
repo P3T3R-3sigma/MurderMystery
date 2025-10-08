@@ -44,6 +44,10 @@ Item {
         for (let i in pItems) {
             pItems[i].updateItem()
         }
+        if (mConstants.stringPickedUp && mConstants.magnetPickedUp) {
+            mMagnetHook.pickUp()
+        }
+
         pItems = pItems
     }
 

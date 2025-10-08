@@ -51,6 +51,7 @@ Item {
             // console.log("mediaStatus:", mediaStatus, "source:", source, "duration:", duration, "now:", Date.now())
             ///////////////////////////////
             if (mediaStatus === MediaPlayer.EndOfMedia) {
+                pVisited = true
                 sVideoEnd()
                 ///////////////////////////////
                 // console.log("End of media reached.")
@@ -74,6 +75,7 @@ Item {
 
 
     function onInteract() {
+        pVisited = true
         sVideoEnd()
     }
 

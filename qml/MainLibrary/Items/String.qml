@@ -3,8 +3,11 @@ import QtQuick 2.0
 BaseItem {
     id: iString
 
-    pXYWH: [1600, 50, 50, 50]
-    pColor: "red"
+    pXYWH: [1700, 550, 50, 50]
     pName: "String"
     pSource: "String.png"
+
+    function onPickUp() {
+        mConstants.stringPickedUp = true
+    }
 }

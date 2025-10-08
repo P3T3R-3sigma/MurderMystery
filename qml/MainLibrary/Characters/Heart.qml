@@ -7,7 +7,7 @@ BaseCharacter {
 
     visible: true
 
-    pXYWH: [550, 50, 50, 50]
+    pXYWH: [1150, 300, 200, 200]
     pColor: "red"
     pName: "Heart"
 
@@ -22,6 +22,7 @@ BaseCharacter {
     BasicVideo {
         id: iHeartVideo2
         objectName: "Heart: Missing Key"
+        pAvailable: mConstants.videoMissing
     }
     BasicVideo {
         id: iHeartVideo3
@@ -52,8 +53,7 @@ BaseCharacter {
     }
 
     function playedVideo2() {
-        mCandee.makeVideo2Available()
-        mRaul.makeVideo2Available()
+        mConstants.heartLostTheKeys = true
     }
     function playedVideo3() {
         makeVideo4Available()

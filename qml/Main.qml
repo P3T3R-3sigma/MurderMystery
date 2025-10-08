@@ -2,6 +2,7 @@ import Felgo 4.0
 import QtQuick 2.0
 
 import "MainLibrary/Characters"
+import "MainLibrary//Controll"
 import "MainLibrary/Items"
 import "MainLibrary/Managers"
 import "MainLibrary/Views/BigStorageRoom"
@@ -9,7 +10,9 @@ import "MainLibrary/Views/ChangingRoom"
 import "MainLibrary/Views/VIP_Alcove"
 import "MainLibrary/Views/MakeUpRoom"
 import "MainLibrary/Views/BossRoom"
+import "MainLibrary/Views/MainRoom"
 import "MainLibrary/Puzzle/MagnetHook"
+import "MainLibrary"
 
 GameWindow {
     id: gameWindow
@@ -37,43 +40,91 @@ GameWindow {
         width: 1920
         height: 1080
 
-        property var mCurrentScene: null
+        property var mCurrentScene: scene
         property bool mEnabled: true
+
+        AppImage {
+            anchors.fill: parent
+            visible: false
+            source: "../assets/Images/MapOfRooms.png"
+        }
 
 
         MainManager { id: mMainManager }
+        Constants { id: mConstants }
 
         CharacterManager { id: mCharacterManager }
 
-        Angel { id: mAngel }
-        Milan { id: mMilan }
-        Costa { id: mCosta }
-        Candee { id: mCandee }
-        Heart { id: mHeart }
-        Raul { id: mRaul}
 
 
         ItemManager { id: mItemManager }
-
-        ExtensionCable { id: mExtensionCable }
-        Iron { id: mIron }
-        KeyBlue { id: mKeyBlue }
-        KeyFrozen { id: mKeyFrozen }
-        KeyGreen { id: mKeyGreen }
         MagnetHook { id: mMagnetHook }
-        MoneyOfAmy { id: mMoneyOfAmy }
-        SideSafeGear { id: mSideSafeGear }
 
         // MagnetHookGame {}
 
-        PlaceManager {
-            id: mPlaceManager
-        }
+        PlaceManager { id: mPlaceManager }
 
         BigStorageRoom { id: mBigStorageRoom }
         ChangingRoom { id: mChangingRoom }
         VIP_Alcove { id: mVIP_Alcove }
-        MakeUpRoom { id: mMakeUpRoom }
+        MakeUpRoom { id: mMakeUpRoom}
         BossRoom { id: mBossRoom }
+        MainRoom { id: mMainRoom }
+        BarView { id: mBarView }
+        SideView { id: mSideView }
+
+
+        NavigationRect {
+            xPercent: 0.703
+            yPercent: 0.175
+            widthPercent: 0.273
+            heightPercent: 0.245
+            pEnabled: scene.mCurrentScene === scene
+            functionOnClicked: function() {mBigStorageRoom.startFadeIn()}
+        }
+        NavigationRect {
+            xPercent: 0.2235
+            yPercent: 0.35
+            widthPercent: 0.4765
+            heightPercent: 0.52
+            pEnabled: scene.mCurrentScene === scene
+            functionOnClicked: function() {mMainRoom.startFadeIn()}
+        }
+        NavigationRect {
+            xPercent: 0.03
+            yPercent: 0.63
+            widthPercent: 0.191
+            heightPercent: 0.241
+            pEnabled: scene.mCurrentScene === scene
+            functionOnClicked: function() {mVIP_Alcove.startFadeIn()}
+        }
+        NavigationRect {
+            xPercent: 0.03
+            yPercent: 0.35
+            widthPercent: 0.191
+            heightPercent: 0.28
+            pEnabled: scene.mCurrentScene === scene
+            functionOnClicked: function() {mMakeUpRoom.startFadeIn()}
+        }
+        NavigationRect {
+            xPercent: 0.03
+            yPercent: 0.105
+            widthPercent: 0.191
+            heightPercent: 0.242
+            pEnabled: scene.mCurrentScene === scene
+            functionOnClicked: function() {mChangingRoom.startFadeIn()}
+        }
+        NavigationRect {
+            xPercent: 0.2235
+            yPercent: 0.105
+            widthPercent: 0.475
+            heightPercent: 0.242
+            pEnabled: scene.mCurrentScene === scene
+            functionOnClicked: function() {mBossRoom.startFadeIn()}
+        }
+        function startFadeIn() {
+            mCurrentScene = scene
+            scene.mEnabled = true
+        }
     }
 }

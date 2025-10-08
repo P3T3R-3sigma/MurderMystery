@@ -11,9 +11,12 @@ BaseView {
     pImageSource: "MakeUpDesk.png"
     pBackView: mMakeUpRoom
 
-
-
-
+    HairDryer {
+        xPercent: 0.4
+        yPercent: 0.57
+        widthPercent: 0.15*1080/1920
+        heightPercent: 0.15
+    }
 }
 
 

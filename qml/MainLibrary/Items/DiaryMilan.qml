@@ -3,12 +3,12 @@ import QtQuick 2.0
 BaseItem {
     id: milanDiary
 
-    pXYWH: [1100, 50, 50, 50]
-    pColor: "red"
+    pXYWH: [1500, 550, 50, 50]
+
     pName: "Diary Milan"
     pSource: "Diary.png"
 
     function onPickUp() {
-        mMilan.makeVideo2Available()
+        mConstants.diaryMilanPickedUp = true
     }
 }

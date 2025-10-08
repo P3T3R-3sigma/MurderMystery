@@ -3,9 +3,12 @@ import QtQuick 2.0
 BaseItem {
     id: extensionCable
 
-    visible: true
-
-    pXYWH: [1200, 50, 50, 50]
-    pColor: "red"
+    pXYWH: [1600, 550, 50, 50]
     pName: "Extension Cable"
+    pSource: "ExtensionCord.png"
+
+
+    function onPickUp() {
+        mConstants.extensionCablePickedUp = true
+    }
 }

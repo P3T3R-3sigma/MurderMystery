@@ -66,12 +66,24 @@ BaseView {
         yPercent: 0.69
         widthPercent: 0.095
         heightPercent: 0.18
-        pEnabled: pRightOpen && !pSafeOpen
+        pEnabled: pRightOpen && !pSafeOpen && mConstants.redKeyPickedUp && mConstants.greenKeyPickedUp && mConstants.blueKeyPickedUp
         functionOnClicked: function() {pSafeOpen = true; calculateImage()}
+    }
+    NavigationRect {
+        id: useComputer
+        xPercent: 0.387
+        yPercent: 0.172
+        widthPercent: 0.3
+        heightPercent: 0.19
+        pEnabled: true
+        functionOnClicked: function() {mComputer.startFadeIn()}
     }
 
     MainSafe {
         id: mMainSafe
+    }
+    Computer {
+        id: mComputer
     }
 
     function calculateImage() {

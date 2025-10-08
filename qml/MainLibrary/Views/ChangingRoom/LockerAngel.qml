@@ -17,6 +17,12 @@ BaseView {
         widthPercent: 0.1
         heightPercent: 0.1
     }
+    SideSafeGear {
+        xPercent: 0.7
+        yPercent: 0.57
+        widthPercent: 0.1
+        heightPercent: 0.1
+    }
 }
 
 

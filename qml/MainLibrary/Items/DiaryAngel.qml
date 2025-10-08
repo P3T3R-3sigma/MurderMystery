@@ -4,12 +4,11 @@ BaseItem {
     id: angelDiary
 
 
-    pXYWH: [1000, 50, 50, 50]
-    pColor: "red"
+    pXYWH: [1500, 650, 50, 50]
     pName: "Diary Angel"
     pSource: "Diary.png"
 
     function onPickUp() {
-        mAngel.makeVideo3Available()
+        mConstants.diaryAngelPickedUp = true
     }
 }

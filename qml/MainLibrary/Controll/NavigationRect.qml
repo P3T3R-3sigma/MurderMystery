@@ -48,7 +48,6 @@ Rectangle {
             onClicked: {
                 if (functionOnClicked) {
                     if (scene.mCurrentScene === iNavigationRect.parent) {
-                        console.log(scene.mCurrentScene, iNavigationRect.parent)
                         functionOnClicked()
                     }
                 }

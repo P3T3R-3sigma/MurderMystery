@@ -7,7 +7,7 @@ Rectangle {
     id: baseItem
 
     property var pXYWH: [100, 100, 100, 100]
-    property string pColor: "red"
+    property string pColor: pPickedUp ? "blue" : "red"
     property string pName: ""
 
     property real xPercent
@@ -17,6 +17,7 @@ Rectangle {
 
     property string pSource: ""
 
+    property bool pEnabled: true
     property bool pPickedUp: false
 
     x: parent.width * xPercent
@@ -45,6 +46,7 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
+            enabled: pEnabled
 
             onEntered: {
                 navRect.opacity = 0.5
@@ -66,20 +68,13 @@ Rectangle {
 
     function onPickUp() {}
     function pickUp() {
+        console.log("HERE")
         baseItem.onPickUp()
         pPickedUp = true
         mMainManager.updateAll()
     }
 
     function updateItem() {
-        setVisual()
-    }
 
-    function setVisual() {
-        if (pPickedUp) {
-            pColor = "blue"
-        } else {
-            pColor = "red"
-        }
     }
 }

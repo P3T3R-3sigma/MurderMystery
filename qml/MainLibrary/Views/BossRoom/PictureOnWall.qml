@@ -39,7 +39,7 @@ BaseView {
         yPercent: 0.31
         widthPercent: 0.17
         heightPercent: 0.28
-        pEnabled: !pSafeOpen && pPictureOpen
+        pEnabled: !pSafeOpen && pPictureOpen && mConstants.safeGearPickedUp
         functionOnClicked: function() {pSafeOpen = true; calculateImage()}
     }
     NavigationRect {

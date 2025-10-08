@@ -6,7 +6,7 @@ import "../../Controll"
 import "../../Items"
 
 BaseView {
-    id: iMakeUpDesk
+    id: iMainSafe
 
     pImageSource: "MainSafe.png"
     pBackView: mDeskOfHeart

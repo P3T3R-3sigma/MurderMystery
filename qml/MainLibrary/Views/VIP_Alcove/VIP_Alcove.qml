@@ -2,12 +2,19 @@ import QtQuick
 import Felgo
 
 import "../../Controll"
+import "../..//Characters"
 import "../"
 
 BaseView {
     id: iVIP_Alcove
     objectName: "VIP Alcove"
     pImageSource: "VIP_Alcove.png"
+    pBackView: mSideView
+
+
+    Costa { id: mCosta }
+
+    Raul { id: mRaul}
 
     NavigationRect {
         xPercent: 0.77

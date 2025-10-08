@@ -54,7 +54,7 @@ BaseView {
         heightPercent: 0.06
         pEnabled: !pAngelOpen
         pSource: "Padlock.png"
-        functionOnClicked: function() {pAngelOpen = true }
+        functionOnClicked: function() {pAngelOpen = true; mConstants.closetAngelOpened = true; mMainManager.updateAll() }
     }
 
     NavigationRect {

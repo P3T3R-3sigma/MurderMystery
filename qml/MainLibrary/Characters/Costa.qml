@@ -7,7 +7,7 @@ BaseCharacter {
 
     visible: true
 
-    pXYWH: [400, 50, 50, 50]
+    pXYWH: [400, 200, 200, 200]
     pColor: "red"
     pName: "Costa"
     pListVideos: [iCostaVideo1, iCostaVideo2]
@@ -25,11 +25,11 @@ BaseCharacter {
     }
 
     Component.onCompleted: {
-        iCostaVideo2.sVideoEnd.connect(playedVideo2)
+        iCostaVideo2 .sVideoEnd.connect(playedVideo2)
     }
 
     function playedVideo2() {
-        mHeart.makeVideo2Available()
+        mConstants.gotVideosFromCosta = true
     }
 }
 

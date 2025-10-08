@@ -7,7 +7,7 @@ BaseCharacter {
 
     visible: true
 
-    pXYWH: [100, 50, 50, 50]
+    pXYWH: [800, 500, 200, 200]
     pColor: "red"
     pName: "Angel"
     pListVideos: [iAngelVideo1, iAngelVideo2, iAngelVideo3, iAngelVideo4]
@@ -20,10 +20,12 @@ BaseCharacter {
     BasicVideo {
         id: iAngelVideo2
         objectName: "Angel: Stolen money"
+        pAvailable: mConstants.closetAngelOpened
     }
     BasicVideo {
         id: iAngelVideo3
         objectName: "Angel: Confront"
+        pAvailable: mConstants.diaryAngelPickedUp
     }
     BasicVideo {
         id: iAngelVideo4
@@ -37,16 +39,6 @@ BaseCharacter {
 
     function playedVideo3() {
         makeVideo4Available()
-    }
-
-    function makeVideo1Available() {
-        iAngelVideo1.pAvailable = true
-    }
-    function makeVideo2Available() {
-        iAngelVideo2.pAvailable = true
-    }
-    function makeVideo3Available() {
-        iAngelVideo3.pAvailable = true
     }
     function makeVideo4Available() {
         iAngelVideo4.pAvailable = true

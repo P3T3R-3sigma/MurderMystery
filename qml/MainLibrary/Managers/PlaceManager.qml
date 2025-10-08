@@ -8,32 +8,6 @@ Item {
 
     property var pPlaces: []
 
-    visible: true
-
-    Repeater {
-        id: irepeater
-        model: pPlaces.length
-
-        Rectangle {
-            x: 100 + index*200
-            y: 400
-            width: 100
-            height: 100
-            color: "blue"
-
-            Text {
-                anchors.fill: parent
-                text: pPlaces[index].objectName
-                wrapMode: Text.WordWrap
-            }
-            MouseArea {
-                anchors.fill: parent
-                enabled: scene.mCurrentScene === null
-                onClicked: { pPlaces[index].startFadeIn() }
-            }
-        }
-    }
-
     function addPlace(place) {
         pPlaces.push(place)
         pPlaces = pPlaces

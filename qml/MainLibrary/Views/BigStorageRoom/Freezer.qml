@@ -14,7 +14,7 @@ BaseView {
     property bool pFreezerOpen: false
     property bool pFridgeOpen: false
     property bool pMagnetTaken: false
-    property bool pKeyTaken: false
+    property bool pIceMelted: false
 
     NavigationRect {
         id: closeFridge
@@ -61,17 +61,26 @@ BaseView {
         visible: !pPickedUp && !pFridgeOpen
     }
     NavigationRect {
-        id: takeKey
+        id: meltIce
         xPercent: 0.29
-        yPercent: 0.82
-        widthPercent: 0.1
+        yPercent: 0.83
+        widthPercent: 0.09
         heightPercent: 0.15
-        pEnabled: pFreezerOpen && !pKeyTaken
-        functionOnClicked: function() {pKeyTaken = true; calculateImage()}
+        pEnabled: pFreezerOpen && !pIceMelted && mConstants.hairDryerPickedUp && mConstants.extensionCablePickedUp
+        functionOnClicked: function() {pIceMelted = true; calculateImage()}
+    }
+    KeyBlue {
+        id: takeKey
+        xPercent: 0.32
+        yPercent: 0.9
+        widthPercent: 0.03
+        heightPercent: 0.055
+        visible: pFreezerOpen && !pPickedUp
+        pEnabled: pIceMelted
     }
 
     function calculateImage() {
-        if (pFreezerOpen && pFridgeOpen && !pKeyTaken) {
+        if (pFreezerOpen && pFridgeOpen && !pIceMelted) {
             pImageSource = "FreezerBothOpen.png"
         }
         else if (!pFreezerOpen && !pFridgeOpen) {
@@ -80,13 +89,13 @@ BaseView {
         else if (!pFreezerOpen && pFridgeOpen) {
             pImageSource = "FreezerFridgeOpen.png"
         }
-        else if (pFreezerOpen && !pFridgeOpen && !pKeyTaken) {
+        else if (pFreezerOpen && !pFridgeOpen && !pIceMelted) {
             pImageSource = "FreezerFreezerOpen.png"
         }
-        else if (pFreezerOpen && pFridgeOpen && pKeyTaken) {
+        else if (pFreezerOpen && pFridgeOpen && pIceMelted) {
             pImageSource = "FreezerBothOpenNoKey.png"
         }
-        else if (pFreezerOpen && !pFridgeOpen && pKeyTaken) {
+        else if (pFreezerOpen && !pFridgeOpen && pIceMelted) {
             pImageSource = "FreezerOpenNoKey.png"
         }
         else {

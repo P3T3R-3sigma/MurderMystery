@@ -7,8 +7,8 @@ import "../"
 BaseView {
     id: iBossRoom
     objectName: "Boss's Room"
-
     pImageSource: "BossRoom.png"
+    pBackView: mMainRoom
 
     NavigationRect {
         xPercent: 0.01
@@ -23,6 +23,18 @@ BaseView {
         widthPercent: 0.35
         heightPercent: 0.35
         functionOnClicked: function() { mDeskOfHeart.startFadeIn()}
+    }
+    NavigationRect {
+        xPercent: 0.88
+        yPercent: 0.33
+        widthPercent: 0.12
+        heightPercent: 0.45
+        pEnabled: true
+        functionOnClicked: function() {mClosetHeart.startFadeIn()}
+    }
+
+    ClosetHeart {
+        id: mClosetHeart
     }
 
     PictureOnWall {

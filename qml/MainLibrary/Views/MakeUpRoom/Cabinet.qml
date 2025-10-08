@@ -8,7 +8,6 @@ import "../../Items"
 BaseView {
     id: iMakeUpCabinet
 
-    pImageSource: "MakeUpCabinet.png"
     pBackView: mMakeUpRoom
 
 
