@@ -90,7 +90,7 @@ BaseView {
         if (pRightOpen && pLeftOpen && !pSafeOpen) {
             pImageSource = "DeskOfHeartBothOpenSafeClosed.png"
         }
-        if (pRightOpen && pLeftOpen && pSafeOpen) {
+        else if (pRightOpen && pLeftOpen && pSafeOpen) {
             pImageSource = "DeskOfHeartBothOpenSafeOpen.png"
         }
         else if (!pRightOpen && !pLeftOpen) {

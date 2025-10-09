@@ -27,6 +27,7 @@ BaseCharacter {
     BasicVideo {
         id: iHeartVideo3
         objectName: "Heart: Confront"
+        pAvailable: mConstants.blackMailVideoPickedUp
     }
     BasicVideo {
         id: iHeartVideo4
@@ -56,37 +57,16 @@ BaseCharacter {
         mConstants.heartLostTheKeys = true
     }
     function playedVideo3() {
-        makeVideo4Available()
-        makeVideo5Available()
-    }
-    function playedVideo4() {
-        makeVideo6Available()
-    }
-    function playedVideo5() {
-        makeVideo7Available()
-    }
-
-
-    function makeVideo1Available() {
-        iHeartVideo1.pAvailable = true
-    }
-    function makeVideo2Available() {
-        iHeartVideo2.pAvailable = true
-    }
-    function makeVideo3Available() {
-        iHeartVideo3.pAvailable = true
-    }
-    function makeVideo4Available() {
         iHeartVideo4.pAvailable = true
-    }
-    function makeVideo5Available() {
         iHeartVideo5.pAvailable = true
     }
-    function makeVideo6Available() {
+    function playedVideo4() {
         iHeartVideo6.pAvailable = true
+        iHeartVideo5.pAvailable = false
     }
-    function makeVideo7Available() {
+    function playedVideo5() {
         iHeartVideo7.pAvailable = true
+        iHeartVideo4.pAvailable = false
     }
 }
 

@@ -30,7 +30,7 @@ BaseView {
     KeyGreen {
         id: mKeyGreen
         xPercent: 0.32
-        yPercent: 0.9
+        yPercent: 0.65
         widthPercent: 0.03
         heightPercent: 0.055
         visible: mConstants.candeeDropedTheKey && !pPickedUp

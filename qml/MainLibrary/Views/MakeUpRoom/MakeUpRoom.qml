@@ -35,9 +35,6 @@ BaseView {
     MakeUpDesk {
         id: mMakeUpDesk
     }
-    Cabinet {
-        id: mMakeUpCabinet
-    }
 
     Component.onCompleted: mPlaceManager.addPlace(this)
 

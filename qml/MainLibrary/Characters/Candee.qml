@@ -7,8 +7,6 @@ BaseCharacter {
 
     visible: true
 
-    property bool pDropedKey: false
-
     pXYWH: [900, 520, 200, 200]
     pColor: "red"
     pName: "Candee"
@@ -22,7 +20,7 @@ BaseCharacter {
     BasicVideo {
         id: iCandeeVideo2
         objectName: "Candee: Drops Key"
-        pAvailable: mConstants.heartLostTheKeys
+        pAvailable: mConstants.candeeDropedTheKey
     }
     BasicVideo {
         id: iCandeeVideo3
@@ -47,6 +45,7 @@ BaseCharacter {
     }
 
     Component.onCompleted: {
+        iCandeeVideo2.sVideoEnd.connect(playedVideo2)
         iCandeeVideo3.sVideoEnd.connect(playedVideo3)
         iCandeeVideo4.sVideoEnd.connect(playedVideo4)
         iCandeeVideo5.sVideoEnd.connect(playedVideo5)
@@ -56,27 +55,16 @@ BaseCharacter {
         mConstants.candeeDropedTheKey = true
     }
     function playedVideo3() {
-        makeVideo4Available()
-        makeVideo5Available()
-    }
-    function playedVideo4() {
-        makeVideo6Available()
-    }
-    function playedVideo5() {
-        makeVideo7Available()
-    }
-
-    function makeVideo4Available() {
         iCandeeVideo4.pAvailable = true
-    }
-    function makeVideo5Available() {
         iCandeeVideo5.pAvailable = true
     }
-    function makeVideo6Available() {
+    function playedVideo4() {
         iCandeeVideo6.pAvailable = true
+        iCandeeVideo5.pAvailable = false
     }
-    function makeVideo7Available() {
+    function playedVideo5() {
         iCandeeVideo7.pAvailable = true
+        iCandeeVideo4.pAvailable = false
     }
 }
 

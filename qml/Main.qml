@@ -45,7 +45,7 @@ GameWindow {
 
         AppImage {
             anchors.fill: parent
-            visible: false
+            visible: scene.mCurrentScene === scene
             source: "../assets/Images/MapOfRooms.png"
         }
 

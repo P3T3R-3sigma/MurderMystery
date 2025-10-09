@@ -12,11 +12,17 @@ BaseView {
     pBackView: mPictureOnWall
 
     KeyRed {
-        id: mKeyRed
         xPercent: 0.5
         yPercent: 0.3
         widthPercent: 0.05
         heightPercent: 0.05
+    }
+    BlackMailVideo {
+        xPercent: 0.4
+        yPercent: 0.3
+        widthPercent: 0.05
+        heightPercent: 0.05
+
     }
 
 

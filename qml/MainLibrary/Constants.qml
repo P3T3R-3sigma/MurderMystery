@@ -14,6 +14,7 @@ Item {
     property bool blueKeyPickedUp: false
     property bool greenKeyPickedUp: false
     property bool murderVideoPickedUp: false
+    property bool blackMailVideoPickedUp: false
     property bool magnetHookPickedUp: false
 
     property bool gotVideosFromCosta: false
