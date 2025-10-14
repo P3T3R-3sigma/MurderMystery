@@ -4,6 +4,7 @@ import Felgo
 import "../"
 import "../../Controll"
 import "../../Items"
+import "../../Puzzle/CircleGame"
 
 BaseView {
     id: iDeskOfHeart
@@ -67,7 +68,7 @@ BaseView {
         widthPercent: 0.095
         heightPercent: 0.18
         pEnabled: pRightOpen && !pSafeOpen && mConstants.redKeyPickedUp && mConstants.greenKeyPickedUp && mConstants.blueKeyPickedUp
-        functionOnClicked: function() {pSafeOpen = true; calculateImage()}
+        functionOnClicked: function() {mCircleGame.startFadeIn()}
     }
     NavigationRect {
         id: useComputer
@@ -84,6 +85,10 @@ BaseView {
     }
     Computer {
         id: mComputer
+    }
+
+    CircleGame {
+        id: mCircleGame
     }
 
     function calculateImage() {

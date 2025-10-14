@@ -20,7 +20,7 @@ BaseCharacter {
     BasicVideo {
         id: iCandeeVideo2
         objectName: "Candee: Drops Key"
-        pAvailable: mConstants.candeeDropedTheKey
+        pAvailable: mConstants.heartLostTheKeys
     }
     BasicVideo {
         id: iCandeeVideo3

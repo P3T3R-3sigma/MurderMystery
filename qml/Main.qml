@@ -11,7 +11,7 @@ import "MainLibrary/Views/VIP_Alcove"
 import "MainLibrary/Views/MakeUpRoom"
 import "MainLibrary/Views/BossRoom"
 import "MainLibrary/Views/MainRoom"
-import "MainLibrary/Puzzle/MagnetHook"
+import "MainLibrary/Puzzle/MagnetGame"
 import "MainLibrary"
 
 GameWindow {
@@ -59,8 +59,6 @@ GameWindow {
 
         ItemManager { id: mItemManager }
         MagnetHook { id: mMagnetHook }
-
-        // MagnetHookGame {}
 
         PlaceManager { id: mPlaceManager }
 

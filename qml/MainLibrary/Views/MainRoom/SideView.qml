@@ -4,6 +4,7 @@ import Felgo
 import "../../Controll"
 import "../../Characters"
 import "../../Items"
+import "../..//Puzzle/MagnetGame"
 import "../"
 
 BaseView {
@@ -27,17 +28,24 @@ BaseView {
         functionOnClicked: function() {startFadeOut(mMakeUpRoom) }
     }
 
-    KeyGreen {
-        id: mKeyGreen
-        xPercent: 0.32
-        yPercent: 0.65
-        widthPercent: 0.03
-        heightPercent: 0.055
-        visible: mConstants.candeeDropedTheKey && !pPickedUp
+    NavigationRect {
+        xPercent: 0.305
+        yPercent: 0.63
+        widthPercent: 0.065
+        heightPercent: 0.11
+        visible: mConstants.candeeDropedTheKey && !mConstants.greenKeyPickedUp
         pEnabled: mConstants.magnetHookPickedUp
+        functionOnClicked: function() {mMagnetGame.startFadeIn() }
     }
 
     Candee { id: mCandee }
+
+    KeyGreen {
+        id: mKeyGreen
+        visible: false
+    }
+
+    MagnetGame { id: mMagnetGame }
 
     Component.onCompleted: mPlaceManager.addPlace(this)
 

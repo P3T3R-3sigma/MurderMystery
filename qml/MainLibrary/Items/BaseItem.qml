@@ -68,7 +68,6 @@ Rectangle {
 
     function onPickUp() {}
     function pickUp() {
-        console.log("HERE")
         baseItem.onPickUp()
         pPickedUp = true
         mMainManager.updateAll()
