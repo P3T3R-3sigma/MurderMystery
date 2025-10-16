@@ -4,6 +4,7 @@ import Felgo
 import "../"
 import "../../Controll"
 import "../../Items"
+import "../../Puzzle/GearGame"
 
 BaseView {
     id: iSideSafePicture
@@ -40,7 +41,7 @@ BaseView {
         widthPercent: 0.17
         heightPercent: 0.28
         pEnabled: !pSafeOpen && pPictureOpen && mConstants.safeGearPickedUp
-        functionOnClicked: function() {pSafeOpen = true; calculateImage()}
+        functionOnClicked: function() { mGearGame.startFadeIn() }
     }
     NavigationRect {
         id: searchSafe
@@ -54,6 +55,10 @@ BaseView {
 
     SideSafe {
         id: mSideSafe
+    }
+
+    GearGame {
+        id: mGearGame
     }
 
     function calculateImage() {
