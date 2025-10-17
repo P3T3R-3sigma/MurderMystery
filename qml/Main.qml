@@ -12,6 +12,7 @@ import "MainLibrary/Views/MakeUpRoom"
 import "MainLibrary/Views/BossRoom"
 import "MainLibrary/Views/MainRoom"
 import "MainLibrary/Puzzle/MagnetGame"
+import "MainLibrary/Inventory"
 import "MainLibrary"
 
 GameWindow {
@@ -49,6 +50,10 @@ GameWindow {
             source: "../assets/Images/MapOfRooms.png"
         }
 
+        Inventory {
+            id: mInventory;
+            visible: scene.mCurrentScene === scene
+        }
 
         MainManager { id: mMainManager }
         Constants { id: mConstants }

@@ -70,6 +70,7 @@ Rectangle {
     function pickUp() {
         baseItem.onPickUp()
         pPickedUp = true
+        mInventory.addToInventory(this)
         mMainManager.updateAll()
     }
 
