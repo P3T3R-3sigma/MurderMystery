@@ -52,7 +52,7 @@ GameWindow {
 
         Inventory {
             id: mInventory;
-            visible: scene.mCurrentScene === scene
+            z: 10
         }
 
         MainManager { id: mMainManager }

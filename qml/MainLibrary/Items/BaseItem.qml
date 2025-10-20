@@ -16,6 +16,7 @@ Rectangle {
     property real heightPercent
 
     property string pSource: ""
+    property string pDescription: "This is " + pSource
 
     property bool pEnabled: true
     property bool pPickedUp: false
@@ -35,28 +36,19 @@ Rectangle {
     }
 
     Rectangle {
-        id: navRect
-
+        id: iPickupRect
         anchors.fill: parent
 
         color: "lightpink"
         opacity: 0
-
-
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
             enabled: pEnabled
 
-            onEntered: {
-                navRect.opacity = 0.5
-            }
-            onExited: {
-                navRect.opacity = 0
-            }
-            onClicked: {
-                baseItem.pickUp()
-            }
+            onEntered: iPickupRect.opacity = 0.5
+            onExited: iPickupRect.opacity = 0
+            onClicked: baseItem.pickUp()
         }
     }
 
