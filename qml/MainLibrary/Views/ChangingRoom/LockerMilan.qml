@@ -8,24 +8,22 @@ import "../../Items"
 BaseView {
     id: iMilanLocker
 
-    pImageSource: "LockerMilan.png"
-    pBackView: mLocker
+    BaseItem {
+        id: milanDiary
 
-    DiaryMilan {
-        xPercent: 0.5
-        yPercent: 0.6
-        widthPercent: 0.1
-        heightPercent: 0.1
+        pXYWH: [1500, 550, 50, 50]
+
+        pName: "Milan BlackMail"
+        pUse: mConstants.mUseEnum.MILAN_BLACKMAIL
+
+        x: 1100
+        y: 650
+        width: 100
+        height: 100
+        function onPickUp() {
+            mConstants.diaryMilanPickedUp = true
+        }
     }
-    String {
-        xPercent: 0.63
-        yPercent: 0.6
-        widthPercent: 0.1
-        heightPercent: 0.1
-    }
-
-
-
 }
 
 

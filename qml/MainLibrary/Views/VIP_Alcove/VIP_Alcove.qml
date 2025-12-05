@@ -2,28 +2,28 @@ import QtQuick
 import Felgo
 
 import "../../Controll"
-import "../..//Characters"
+import "../../Characters"
 import "../"
 
-BaseView {
+Item {
     id: iVIP_Alcove
+    anchors.fill: parent
     objectName: "VIP Alcove"
-    pImageSource: "VIP_Alcove.png"
-    pBackView: mSideView
-
-
-    Costa { id: mCosta }
+    visible: false
 
     Raul { id: mRaul}
 
-    NavigationRect {
-        xPercent: 0.77
-        yPercent: 0.28
-        widthPercent: 0.1
-        heightPercent: 0.5
-        functionOnClicked: function() { startFadeOut(mMakeUpRoom) }
+
+    function startFadeIn(idx = 0) {
+        iVIP_Alcove.visible = true
+        scene.mCurrentScene = iVIP_Alcove
+        mRaul.enterVIP()
     }
 
+    function changeRoom() {
+        iVIP_Alcove.visible = false
+        mMainRoom.startFadeIn(0)
+    }
 
     Component.onCompleted: mPlaceManager.addPlace(this)
 

@@ -4,18 +4,17 @@ import Felgo
 Rectangle {
     id: iNavigationRect
 
-    property real xPercent
-    property real yPercent
-    property real widthPercent
-    property real heightPercent
+    property var pXYWH: []
     property var functionOnClicked: null
-    property bool pEnabled: true
+    property bool pEnabled: parent.pEnabled && pAdditionalEnable
+    property bool pAdditionalEnable: true
     property string pSource: ""
 
-    x: parent.width * xPercent
-    y: parent.height * yPercent
-    width:  parent.width * widthPercent
-    height: parent.height * heightPercent
+    x: pXYWH[0]
+    y: pXYWH[1]
+    width: pXYWH[2]
+    height: pXYWH[3]
+    z: 2
 
     visible: pEnabled
     color: "transparent"
@@ -47,9 +46,7 @@ Rectangle {
             }
             onClicked: {
                 if (functionOnClicked) {
-                    if (scene.mCurrentScene === iNavigationRect.parent) {
-                        functionOnClicked()
-                    }
+                    functionOnClicked()
                 }
             }
         }

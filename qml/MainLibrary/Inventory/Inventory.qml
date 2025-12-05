@@ -1,7 +1,7 @@
 import QtQuick
 import Felgo
 
-import "../Interact"
+import "../../BaseLibrary"
 
 Item {
     id: iInventory
@@ -9,19 +9,15 @@ Item {
 
     property var pInventory: []
 
-    function addToInventory(item) {
-        pInventory.push(item)
-        pInventory = pInventory
-    }
-
     Rectangle {
         id: iClosedInventory
-        x: parent.width * 0.85
-        y: parent.height * 0.85
-        width: parent.width * 0.1
-        height: parent.height * 0.1
+        x: 1600
+        y: 900
+        width: 200
+        height: 100
         color: "#824F28"
 
+        z: 10
         visible: true
 
         Text {
@@ -33,129 +29,81 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                iInspect.visible = false
+                mInspect.visible = false
                 iOpenInventory.visible = !iOpenInventory.visible
+                scene.mEnabled = !scene.mEnabled
             }
         }
     }
     Rectangle {
         id: iOpenInventory
-        x: (parent.width-width)/2
-        y: (parent.height-height)/2
-        width: parent.width * 0.6
-        height: parent.width * (0.1+0.02)*3
+        anchors.centerIn: parent
+        width: 1125
+        height: 800
         color: "#824F28"
 
         visible: false
 
         Flow {
-            x: iInventory.width * 0.01
-            y: iInventory.width * 0.01
-            width: parent.width * 1
-            height: parent.height * 1
-            spacing: iInventory.width * 0.02
+            x: 50
+            y: 50
+            width: parent.width
+            height: parent.height
+            spacing: 25
             Repeater {
-                model: 15
+                model: 18
 
                 Rectangle {
-                    width: iInventory.width * 0.1
+                    width: 150
                     height: width
                     color: "#613413"
-                    AppImage {
+                    BaseImage {
                         anchors.fill: parent
-                        source: pInventory.length > index ? "../../../assets/Images/" + pInventory[index].pSource : ""
+                        pAssetCode: pInventory.length > index ? pInventory[index].pCode : ""
                     }
                     MouseArea {
                         anchors.fill: parent
+                        enabled: !mInspect.visible
                         onClicked: {
                             if (pInventory.length > index) {
-                                inspect(index)
+                                mInspect.pIndex = index
+                                mInspect.visible = true
                             }
                         }
                     }
                 }
             }
         }
+        Matcher {
+            id: mMatcher
+            y: 625
+        }
     }
 
-    Rectangle {
-        id: iInspect
-        x: (parent.width-width)/2
-        y: (parent.height-height)/2
-        width: parent.width * 0.8
-        height: parent.height * 0.8
-        color: "#824F28"
+    function addToInventory(item) {
+        pInventory.push(item)
+        pInventory = pInventory
+    }
 
-        visible: false
-
-        Rectangle {
-            x: parent.width * 0.1
-            y: parent.height * 0.2
-            width: parent.width * 0.3
-            height: parent.height * 0.6
-            color: "#613413"
-            Rectangle {
-                anchors.centerIn: parent
-                width: parent.width * 0.4
-                height: width
-                color: "#613413"
-                AppImage {
-                    id: iInspectSource
-                    anchors.fill: parent
-                    source: pSource ? "../../../assets/Images/" + pSource : ""
-                }
-            }
-        }
-        Rectangle {
-            x: parent.width * 0.5
-            y: parent.height * 0.1
-            width: parent.width * 0.4
-            height: parent.height * 0.6
-            color: "#613413"
-            Rectangle {
-                x: parent.width * 0.1
-                y: parent.height * 0.4
-                width: parent.width * 0.8
-                height: parent.height * 0.5
-                color: "#824F28"
-                Text {
-                    id: iInspectDescription
-                    anchors.centerIn: parent
-                    text: ""
-                    font.pixelSize: 24
-                }
-            }
-            Rectangle {
-                x: parent.width * 0.1
-                y: parent.height * 0.1
-                width: parent.width * 0.8
-                height: parent.height * 0.2
-                color: "#824F28"
-                Text {
-                    anchors.centerIn: parent
-                    text: "Description"
-                    font.pixelSize: 40
-                }
-            }
-        }
-        Rectangle {
-            x: parent.width * 0.6
-            y: parent.height * 0.8
-            width: parent.width * 0.2
-            height: parent.height * 0.1
-            color: "#613413"
-            Text {
-                anchors.centerIn: parent
-                text: "Use"
-                font.pixelSize: 40
+    function removeItem(item) {
+        for (let i in pInventory) {
+            if (pInventory[i].pUse === item) {
+                pInventory.splice(i, 1)
+                pInventory = pInventory
+                return
             }
         }
     }
 
-
-    function inspect(index) {
-        iInspect.visible = true
-        iInspectSource.source = "../../../assets/Images/" + pInventory[index].pSource
-        iInspectDescription.text = pInventory[index].pDescription
+    function listContent() {
+        for (let i in pInventory) {
+            console.log(pInventory[i], pInventory[i].pCode)
+        }
     }
+
+    function close() {
+        iOpenInventory.visible = false
+    }
+
+    Inspect { id: mInspect }
 }

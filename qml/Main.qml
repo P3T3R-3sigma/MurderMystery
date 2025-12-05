@@ -61,69 +61,66 @@ GameWindow {
         CharacterManager { id: mCharacterManager }
 
 
-
         ItemManager { id: mItemManager }
-        MagnetHook { id: mMagnetHook }
+
+        MagnetHook {
+            width: 0; height: 0;
+            pUse: mConstants.mUseEnum.MAGNETHOOK
+        }
+        KeyRed {
+            width: 0; height: 0;
+            pUse: mConstants.mUseEnum.RED_KEY
+        }
+
 
         PlaceManager { id: mPlaceManager }
 
-        BigStorageRoom { id: mBigStorageRoom }
-        ChangingRoom { id: mChangingRoom }
+        StorageBase { id: mStorage; pBaseCode: "04" }
+        LockersBase { id: mLockers; pBaseCode: "03" }
         VIP_Alcove { id: mVIP_Alcove }
-        MakeUpRoom { id: mMakeUpRoom}
-        BossRoom { id: mBossRoom }
+        MakeUpBase { id: mMakeUpRoom; pBaseCode: "02" }
+        OfficeBase { id: mOffice; pBaseCode: "01" }
+
         MainRoom { id: mMainRoom }
         BarView { id: mBarView }
         SideView { id: mSideView }
 
 
         NavigationRect {
-            xPercent: 0.703
-            yPercent: 0.175
-            widthPercent: 0.273
-            heightPercent: 0.245
+            pXYWH: [1350, 190, 525, 260]
+
             pEnabled: scene.mCurrentScene === scene
-            functionOnClicked: function() {mBigStorageRoom.startFadeIn()}
+            functionOnClicked: function() {mStorage.startFadeIn()}
         }
         NavigationRect {
-            xPercent: 0.2235
-            yPercent: 0.35
-            widthPercent: 0.4765
-            heightPercent: 0.52
+            pXYWH: [425, 380, 920, 565]
+
             pEnabled: scene.mCurrentScene === scene
             functionOnClicked: function() {mMainRoom.startFadeIn()}
         }
         NavigationRect {
-            xPercent: 0.03
-            yPercent: 0.63
-            widthPercent: 0.191
-            heightPercent: 0.241
+            pXYWH: [55, 680, 370, 265]
+
             pEnabled: scene.mCurrentScene === scene
             functionOnClicked: function() {mVIP_Alcove.startFadeIn()}
         }
         NavigationRect {
-            xPercent: 0.03
-            yPercent: 0.35
-            widthPercent: 0.191
-            heightPercent: 0.28
+            pXYWH: [55, 380, 370, 300]
+
             pEnabled: scene.mCurrentScene === scene
             functionOnClicked: function() {mMakeUpRoom.startFadeIn()}
         }
         NavigationRect {
-            xPercent: 0.03
-            yPercent: 0.105
-            widthPercent: 0.191
-            heightPercent: 0.242
+            pXYWH: [55, 115, 370, 260]
+
             pEnabled: scene.mCurrentScene === scene
-            functionOnClicked: function() {mChangingRoom.startFadeIn()}
+            functionOnClicked: function() {mLockers.startFadeIn()}
         }
         NavigationRect {
-            xPercent: 0.2235
-            yPercent: 0.105
-            widthPercent: 0.475
-            heightPercent: 0.242
+            pXYWH: [425, 115, 920, 260]
+
             pEnabled: scene.mCurrentScene === scene
-            functionOnClicked: function() {mBossRoom.startFadeIn()}
+            functionOnClicked: function() {mOffice.startFadeIn(0)}
         }
         function startFadeIn() {
             mCurrentScene = scene

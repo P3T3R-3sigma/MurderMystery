@@ -11,6 +11,13 @@ Item {
     function addCharacter(character) {
         pCharacters.push(character)
     }
+    function getCharacter(lName) {
+        for (let i in pCharacters) {
+            if (pCharacters[i].pName === lName) {
+                return pCharacters[i]
+            }
+        }
+    }
 
     function listContent() {
         for (let i in pCharacters) {

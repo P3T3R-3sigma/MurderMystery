@@ -10,7 +10,7 @@ Item {
     // Physics parameters
     property real l: 200.0  // length in pixels (scaled from 1m)
     property real g: 9810   // Gravity in px/s² (9.81 * 10 for pixel scaling)
-    property real theta0: 0  // Initial angle in radians (30°)
+    property real theta0: Math.PI/18  // Initial angle in radians (30°)
     property real theta: theta0   // Current angle
     property real omega: 0.0      // Angular velocity dθ/dt
     property real dt: 1/120      // Timestep (60 FPS)
@@ -21,6 +21,8 @@ Item {
     // Computed forces (updated in script)
     property real tension: 0.0
     property real ftangential: 0.0
+    property real windForce: 0.0
+
 
     // Pivot position
     property real pivotX: width / 2
@@ -47,6 +49,7 @@ Item {
         blobX = pivotX + l * Math.sin(theta)
         blobY = pivotY + l * Math.cos(theta)
         v = 0
+        mKey.visible = true
     }
 
     function update() {
@@ -65,18 +68,15 @@ Item {
     }
 
     function updateForces() {
-        // tension = m * g * Math.cos(theta) + m * (v * v) / l;
+        windForce = -m * g * Math.cos(theta) * pDir;
         ftangential = -m * g * Math.sin(theta);
 
     }
 
     function updateVelocity() {
-        if (ftangential > 0) {
-            v -= Math.sqrt(Math.abs(2 * ftangential*dt / m))
-        } else {
-            v += Math.sqrt(Math.abs(2 * ftangential*dt / m))
-        }
-
+        v -= Math.sqrt(Math.abs(2 * ftangential*dt / m)) * Math.abs(ftangential)/ftangential
+        v *= 0.999
+        v -= windForce*dt
     }
 
     function updatePosition() {

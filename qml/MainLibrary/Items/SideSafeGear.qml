@@ -6,6 +6,7 @@ BaseItem {
     pXYWH: [1400, 550, 50, 50]
     pName: "Side Safe Gear"
     pSource: "SideSafeGear.png"
+    pUse: mConstants.mUseEnum.GEAR
 
     function onPickUp() {
         mConstants.safeGearPickedUp = true

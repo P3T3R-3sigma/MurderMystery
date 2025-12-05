@@ -40,6 +40,12 @@ qt_add_executable(appMurderMystery
 
 felgo_configure_executable(appMurderMystery)
 
+configure_file(
+    ${CMAKE_SOURCE_DIR}/image_assets.rcc
+    ${CMAKE_BINARY_DIR}/image_assets.rcc
+    COPYONLY
+)
+
 # Deploy resources to build folder/package directly
 # comment for publishing
 deploy_resources("${QmlFiles};${AssetsFiles}")
@@ -52,6 +58,8 @@ qt_add_qml_module(appMurderMystery
 #    QML_FILES ${QmlFiles}
 #    RESOURCES ${AssetsFiles}
     NO_RESOURCE_TARGET_PATH
+    RESOURCES
+        image_assets.qrc
 )
 
 # NOTE: for PUBLISHING, perform the following steps:

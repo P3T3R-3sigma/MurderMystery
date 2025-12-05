@@ -15,6 +15,7 @@ Item {
         Repeater {
             model: 6
             Row {
+                property int cIndex: index
                 spacing: iGrid.width * 0.05 - iGrid.width*0.002 - iGrid.width * 1/80
                 Repeater {
                     model: 9
@@ -24,11 +25,12 @@ Item {
                         height: width
                         radius: width/2
                         color: "gray"
-                        Component.onCompleted: {
-                            Qt.callLater(function() {
-                                var coords = placement.mapToItem(iGrid, 0, 0)
-                                pListplaces.push({ element: placement, x: coords.x+radius, y: coords.y+radius })
-                            })
+                        onVisibleChanged: {
+                            if(visible) {
+                                var coordsX = iGrid.width * 0.2 + (iGrid.width *0.05 - iGrid.width*0.002) * index
+                                var coordsY = iGrid.height * 0.25 + (iGrid.width * 0.05 - iGrid.width*0.002) * cIndex
+                                pListplaces.push({ element: placement, x: coordsX+radius, y: coordsY+radius })
+                            }
                         }
                     }
                 }
@@ -37,9 +39,10 @@ Item {
     }
 
     function shouldSnap(baseX, baseY, mouseX, mouseY) {
-        console.log(mouseX, mouseY)
+        console.log("----------")
         for (let i in pListplaces) {
-            console.log(pListplaces[i].x, pListplaces[i].y)
+            console.log(Math.sqrt(Math.pow((pListplaces[i].x - mouseX), 2) + Math.pow((pListplaces[i].y - mouseY), 2)))
+            console.log(pListplaces[i].x, mouseX, pListplaces[i].y, mouseY)
             if (Math.sqrt(Math.pow((pListplaces[i].x - mouseX), 2) + Math.pow((pListplaces[i].y - mouseY), 2)) < pListplaces[i].element.radius) {
                 return pListplaces[i]
             }

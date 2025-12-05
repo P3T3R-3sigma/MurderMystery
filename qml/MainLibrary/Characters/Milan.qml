@@ -7,20 +7,28 @@ BaseCharacter {
 
     visible: true
 
-    pXYWH: [920, 500, 200, 200]
+    pXYWH: [680, 500, 100, 200]
     pColor: "red"
     pName: "Milan"
-    pListVideos: [iMilanVideo1, iMilanVideo2, iMilanVideo3]
+    pListVideos: [iMilanVideo1, iMilanVideo2, iMilanVideo3, iMilanVideo0]
 
     BasicVideo {
         id: iMilanVideo1
-        objectName: "Milan: First talk"
+        objectName: "Milan: No Video"
         pAvailable: true
+        pSource: ""
+    }
+    BasicVideo {
+        id: iMilanVideo0
+        objectName: "Milan: Different suspects"
+        pAvailable: true
+        pSource: "../../../assets/testVideo/C09_Alex_Milan_Hearts_Interrogating.mov"
     }
     BasicVideo {
         id: iMilanVideo2
         objectName: "Milan: Confront"
         pAvailable: mConstants.milanBlackmailSeen
+        pSource: "../../../assets/testVideo/C07_I found your little secret.mp4"
     }
     BasicVideo {
         id: iMilanVideo3

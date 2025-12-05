@@ -7,33 +7,37 @@ BaseCharacter {
 
     visible: true
 
-    pXYWH: [900, 520, 200, 200]
+    pXYWH: [1000, 550, 150, 500]
     pColor: "red"
     pName: "Candee"
     pListVideos: [iCandeeVideo1, iCandeeVideo2, iCandeeVideo3, iCandeeVideo4, iCandeeVideo5, iCandeeVideo6, iCandeeVideo7]
 
     BasicVideo {
         id: iCandeeVideo1
-        objectName: "Candee: First meeting"
-        pAvailable: true
+        objectName: "Candee: No Video"
+        pAvailable: false
     }
     BasicVideo {
         id: iCandeeVideo2
         objectName: "Candee: Drops Key"
         pAvailable: mConstants.heartLostTheKeys
+        pSource: "../../../assets/testVideo/C05_Key to hairdresser - Alex-candee.mp4"
     }
     BasicVideo {
         id: iCandeeVideo3
         objectName: "Candee: Confront"
         pAvailable: mConstants.murderVideoPickedUp
+        pSource: "../../../assets/testVideo/C03_Candee arrest- Alex-candee.mp4"
     }
     BasicVideo {
         id: iCandeeVideo4
         objectName: "Candee: Accept"
+        pSource: "../../../assets/testVideo/C04_Candee arrest variation 2- Alex-candee.mp4"
     }
     BasicVideo {
         id: iCandeeVideo5
         objectName: "Candee: Refuse"
+        pSource: "../../../assets/testVideo/C03_Candee arrest- Alex-candee.mp4"
     }
     BasicVideo {
         id: iCandeeVideo6

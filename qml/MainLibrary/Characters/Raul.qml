@@ -5,8 +5,6 @@ import "../Videos"
 BaseCharacter {
     id: iRaul
 
-    visible: true
-
     pXYWH: [800, 200, 200, 200]
     pColor: "red"
     pName: "Raul"
@@ -18,10 +16,18 @@ BaseCharacter {
         id: iRaulVideo1
         objectName: "Raul: First meeting"
         pAvailable: true
+        pSource: "../../../assets/testVideo/C14_Raul interrogated.mp4"
     }
 
-    function makeVideo1Available() {
-        iRaulVideo1.pAvailable = true
+    Component.onCompleted: {
+        iRaulVideo1.sVideoEnd.connect(exitVIP)
+    }
+
+    function exitVIP() {
+        scene.mCurrentScene.changeRoom()
+    }
+    function enterVIP() {
+        iRaulVideo1.visible = true
     }
 }
 

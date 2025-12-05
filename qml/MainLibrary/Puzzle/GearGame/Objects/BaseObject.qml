@@ -7,12 +7,12 @@ Item {
     property real pSize: scene.width * 0.1
     property bool pEnabled: true
     property int pDir: 0
+    property bool pConnected: false
     property real pRotationTime: 10000
     property real centerX: x+width/2
     property real centerY: y+height/2
 
     onPDirChanged: {
-        console.log("HERE DIR")
         if (pDir !== 1 && pDir !== -1 && pDir !== 0) {
             console.log("ERROR: pDir = ", pDir)
         }
@@ -29,7 +29,7 @@ Item {
     AppImage {
         id: sourceImage1
         anchors.fill: parent
-        source: "../../../../../assets/Images/MiniGameGear.png" // Replace with your image path
+        source: "../../../../../assets/Images/MiniGameGear.png"
         visible: true
     }
 

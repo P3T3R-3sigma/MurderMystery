@@ -11,10 +11,8 @@ BaseView {
     pBackView: mMakeUpRoom
 
     NavigationRect {
-        xPercent: 0
-        yPercent: 0.1
-        widthPercent: 0.3
-        heightPercent: 0.8
+        pXYWH: [0, 200, 600, 800]
+
         functionOnClicked: function() {mLocker.startFadeIn()}
     }
 

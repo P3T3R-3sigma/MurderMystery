@@ -8,9 +8,6 @@ import "../../Items"
 BaseView {
     id: iFreezer
 
-    pImageSource: "FreezerBothClosed.png"
-    pBackView: iBigStorageRoom
-
     property bool pFreezerOpen: false
     property bool pFridgeOpen: false
     property bool pMagnetTaken: false
@@ -18,88 +15,118 @@ BaseView {
 
     NavigationRect {
         id: closeFridge
-        xPercent: 0.23
-        yPercent: 0.22
-        widthPercent: 0.06
-        heightPercent: 0.4
+        pXYWH: [435, 200, 122, 480]
+
         pEnabled: pFridgeOpen
         functionOnClicked: function() {pFridgeOpen = false; calculateImage()}
     }
     NavigationRect {
         id: closeFreezer
-        xPercent: 0.23
-        yPercent: 0.67
-        widthPercent: 0.06
-        heightPercent: 0.32
+        pXYWH: [435, 760, 122, 300]
+
         pEnabled: pFreezerOpen
         functionOnClicked: function() {pFreezerOpen = false; calculateImage()}
     }
     NavigationRect {
         id: openFridge
-        xPercent: 0.565
-        yPercent: 0.4
-        widthPercent: 0.03
-        heightPercent: 0.18
+        pXYWH: [1088, 435, 60, 180]
+
         pEnabled: !pFridgeOpen
         functionOnClicked: function() {pFridgeOpen = true; calculateImage()}
     }
     NavigationRect {
         id: openFreezer
-        xPercent: 0.565
-        yPercent: 0.63
-        widthPercent: 0.03
-        heightPercent: 0.18
+        pXYWH: [1088, 680, 60, 175]
+
         pEnabled: !pFreezerOpen
         functionOnClicked: function() {pFreezerOpen = true; calculateImage()}
     }
-    Magnet {
-        id: mMagnet
-        xPercent: 0.35
-        yPercent: 0.285
-        widthPercent: 0.02
-        heightPercent: 0.05
+    BaseItem {
+        id: iMagnet
+
+        pXYWH: [1800, 550, 50, 50]
+        pName: "Magnet"
+        pUse: mConstants.mUseEnum.MAGNET
         visible: !pPickedUp && !pFridgeOpen
+
+        x: 600
+        y: 400
+        width: 60
+        height: 75
+
+        function onPickUp() {
+            mConstants.magnetPickedUp = true
+        }
     }
     NavigationRect {
         id: meltIce
-        xPercent: 0.29
-        yPercent: 0.83
-        widthPercent: 0.09
-        heightPercent: 0.15
-        pEnabled: pFreezerOpen && !pIceMelted && mConstants.hairDryerPickedUp && mConstants.extensionCablePickedUp
-        functionOnClicked: function() {pIceMelted = true; calculateImage()}
+        pXYWH: [562, 900, 165, 155]
+
+        pEnabled: pFreezerOpen && !pIceMelted
+        functionOnClicked: function() {console.log("Need to melt the ice.")}
     }
-    KeyBlue {
-        id: takeKey
-        xPercent: 0.32
-        yPercent: 0.9
-        widthPercent: 0.03
-        heightPercent: 0.055
+    BaseItem {
+        id: blueKey
+
+        pXYWH: [1600, 750, 50, 50]
+        pName: "Key Blue"
+        pUse: mConstants.mUseEnum.BLUE_KEY
         visible: pFreezerOpen && !pPickedUp
         pEnabled: pIceMelted
+
+        x: 620
+        y: 950
+        width: 50
+        height: 50
+
+        function onPickUp() {
+            mConstants.blueKeyPickedUp = true
+        }
+    }
+    EnvironmentItem {
+        id: environment
+        pUse: 30
     }
 
     function calculateImage() {
         if (pFreezerOpen && pFridgeOpen && !pIceMelted) {
-            pImageSource = "FreezerBothOpen.png"
+            changeImage("State11")
         }
         else if (!pFreezerOpen && !pFridgeOpen) {
-            pImageSource = "FreezerBothClosed.png"
+            changeImage("State00")
         }
         else if (!pFreezerOpen && pFridgeOpen) {
-            pImageSource = "FreezerFridgeOpen.png"
+            changeImage("State10")
         }
         else if (pFreezerOpen && !pFridgeOpen && !pIceMelted) {
-            pImageSource = "FreezerFreezerOpen.png"
+            changeImage("State01")
         }
         else if (pFreezerOpen && pFridgeOpen && pIceMelted) {
-            pImageSource = "FreezerBothOpenNoKey.png"
+            changeImage("State12")
         }
         else if (pFreezerOpen && !pFridgeOpen && pIceMelted) {
-            pImageSource = "FreezerOpenNoKey.png"
+            changeImage("State02")
         }
         else {
             console.log("ERROR:" + this)
         }
     }
+
+    function shadowUseItem(item) {
+        if (item.pUse === mConstants.mUseEnum.HAIR_DRYER && pFreezerOpen) {
+            if (mConstants.extensionCablePickedUp) {
+                mInventory.removeItem(mConstants.mUseEnum.HAIR_DRYER)
+                mInventory.removeItem(mConstants.mUseEnum.EXTENSION_CABLE)
+                pIceMelted = true
+                calculateImage()
+                console.log("Ice melted.")
+            } else {
+                console.log("Can't reach an outlet. Need an extention.")
+            }
+            return true
+        }
+        return false
+    }
+
+
 }

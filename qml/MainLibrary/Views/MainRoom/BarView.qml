@@ -13,10 +13,8 @@ BaseView {
 
 
     NavigationRect {
-        xPercent: 0.163
-        yPercent: 0.14
-        widthPercent: 0.122
-        heightPercent: 0.45
+        pXYWH: [315, 155, 235, 500]
+
         functionOnClicked: function() { startFadeOut(mBigStorageRoom) }
     }
 

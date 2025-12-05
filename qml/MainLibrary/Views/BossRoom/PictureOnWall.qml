@@ -2,80 +2,94 @@ import QtQuick
 import Felgo
 
 import "../"
-import "../../Controll"
 import "../../Items"
+import "../../Controll"
 import "../../Puzzle/GearGame"
 
 BaseView {
     id: iSideSafePicture
 
-    pImageSource: "PictureOnTheWallFront.png"
-    pBackView: mBossRoom
-
     property bool pPictureOpen: false
+    property bool pGearAdded: false
     property bool pSafeOpen: false
     property bool pSideView: false
 
     NavigationRect {
         id: safeSideView
-        xPercent: 0.63
-        yPercent: 0.1
-        widthPercent: 0.02
-        heightPercent: 0.7
-        pEnabled: !pPictureOpen && !pSideView
+        pXYWH: [1222, 115, 20, 740]
+
+        pAdditionalEnable: !pPictureOpen && !pSideView
         functionOnClicked: function() { pSideView = true; calculateImage()}
     }
     NavigationRect {
         id: pushButton
-        xPercent: 0.474
-        yPercent: 0.584
-        widthPercent: 0.01
-        heightPercent: 0.02
-        pEnabled: pSideView
+        pXYWH: [910, 630, 20, 25]
+
+        pAdditionalEnable: pSideView
         functionOnClicked: function() {pPictureOpen = true; pSideView = false; calculateImage()}
     }
     NavigationRect {
         id: openSafe
-        xPercent: 0.39
-        yPercent: 0.31
-        widthPercent: 0.17
-        heightPercent: 0.28
-        pEnabled: !pSafeOpen && pPictureOpen && mConstants.safeGearPickedUp
-        functionOnClicked: function() { mGearGame.startFadeIn() }
+        pXYWH: [751, 347, 320, 275]
+
+        pAdditionalEnable: !pSafeOpen && pPictureOpen
+        functionOnClicked: function() {
+            if (pGearAdded) {
+                mGearGame.startFadeIn()
+            } else {
+                console.log("Some gears are missing.")
+            }
+        }
     }
     NavigationRect {
         id: searchSafe
-        xPercent: 0.39
-        yPercent: 0.31
-        widthPercent: 0.17
-        heightPercent: 0.28
-        pEnabled: pSafeOpen
+        pXYWH: [751, 347, 320, 275]
+
+        pAdditionalEnable: pSafeOpen
         functionOnClicked: function() { mSideSafe.startFadeIn() }
+    }
+
+    EnvironmentItem {
+        id: environmentSafe
+        visible: pPictureOpen
+        pUse: mConstants.mUseEnum.SIDE_SAFE
     }
 
     SideSafe {
         id: mSideSafe
+        pBackView: iSideSafePicture
+        pCode: "ROOM" + pBaseCode + "GS"
     }
 
     GearGame {
         id: mGearGame
+        pBackView: iSideSafePicture
     }
 
     function calculateImage() {
         if (pSafeOpen) {
-            pImageSource = "SafeOnTheWallOpen.png"
+            changeImage("SafeOpen")
         }
         else if (pPictureOpen && !pSafeOpen) {
-            pImageSource = "PictureOnTheWallOpen.png"
+            changeImage("Open")
         }
         else if (!pPictureOpen && pSideView) {
-            pImageSource = "PictureOnTheWallSide.png"
+            changeImage("Side")
         }
         else if (!pPictureOpen && !pSideView) {
-            pImageSource = "PictureOnTheWall.png"
+            changeImage("Closed")
         }
         else {
             console.log("ERROR:" + this)
+        }
+    }
+
+    function shadowUseItem(item) {
+        if (item.pUse === mConstants.mUseEnum.GEAR && pPictureOpen) {
+            mInventory.removeItem(mConstants.mUseEnum.GEAR)
+            pGearAdded = true
+            calculateImage()
+            return true
         }
     }
 }

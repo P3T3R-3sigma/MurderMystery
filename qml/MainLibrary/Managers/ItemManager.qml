@@ -26,12 +26,24 @@ Item {
                 text: pItems[index].pName
                 wrapMode: Text.WordWrap
             }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: pItems[index].pickUp()
+            }
         }
     }
 
     function addItem(item) {
         pItems.push(item)
         pItems = pItems
+    }
+    function getItem(lName) {
+        for (let i in pItems) {
+            if (pItems[i].pName === lName) {
+                return pItems[i]
+            }
+        }
     }
 
     function listContent() {
@@ -43,9 +55,6 @@ Item {
     function updateContent() {
         for (let i in pItems) {
             pItems[i].updateItem()
-        }
-        if (mConstants.stringPickedUp && mConstants.magnetPickedUp && !mConstants.magnetHookPickedUp) {
-            mMagnetHook.pickUp()
         }
 
         pItems = pItems

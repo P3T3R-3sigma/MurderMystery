@@ -1,8 +1,6 @@
 import QtQuick 2.0
 
-import "../Interact"
-
-InteractCharacter {
+Item {
     id: baseCharacter
 
     property var pVideoToPlay
@@ -10,24 +8,38 @@ InteractCharacter {
     property var pXYWH: [100, 100, 100, 100]
     property string pColor: "orange"
     property string pName: ""
+    z: 10
+    anchors.fill: parent
+    objectName: pName
 
     Rectangle {
         id: iRect
+        anchors.centerIn: iHoverItem
+        width: 200
+        height: 200
+        opacity: 0
+        color: pColor
+    }
+
+    Text {
+        id: iText
+        anchors.centerIn: iRect
+        text: pName
+        font.pixelSize: 50
+        visible: iRect.opacity > 0
+    }
+
+    Item {
+        id: iHoverItem
         x: pXYWH[0]
         y: pXYWH[1]
         width: pXYWH[2]
         height: pXYWH[3]
-        color: pColor
-
-        Text {
-            id: iText
-            anchors.centerIn: parent
-            text: pName
-            font.pixelSize: 50
-        }
-
         MouseArea {
             anchors.fill: parent
+            hoverEnabled: true
+            onEntered: iRect.opacity = 0.5
+            onExited: iRect.opacity = 0
             onClicked: {
                 pVideoToPlay.onInteract()
                 iText.text = pVideoToPlay.objectName

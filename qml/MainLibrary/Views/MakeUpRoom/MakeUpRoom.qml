@@ -11,24 +11,18 @@ BaseView {
     pBackView: mSideView
 
     NavigationRect {
-        xPercent: 0.03
-        yPercent: 0.29
-        widthPercent: 0.1
-        heightPercent: 0.55
+        pXYWH: [50, 250, 180, 700]
+
         functionOnClicked: function() { startFadeOut(mVIP_Alcove) }
     }
     NavigationRect {
-        xPercent: 0.895
-        yPercent: 0.29
-        widthPercent: 0.08
-        heightPercent: 0.55
+        pXYWH: [1725, 300, 135, 650]
+
         functionOnClicked: function() { startFadeOut(mChangingRoom) }
     }
     NavigationRect {
-        xPercent: 0.27
-        yPercent: 0.58
-        widthPercent: 0.3
-        heightPercent: 0.2
+        pXYWH: [505, 620, 560, 220]
+
         functionOnClicked: function() { mMakeUpDesk.startFadeIn() }
     }
 

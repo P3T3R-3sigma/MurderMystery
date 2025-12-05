@@ -9,7 +9,7 @@ Rectangle {
 
     x: pXYWH[0]
     y: pXYWH[1]
-    z: -1
+    z: 0
     width: pXYWH[2]
     height: pXYWH[3]
     color: "blue"

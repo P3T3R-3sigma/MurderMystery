@@ -7,12 +7,8 @@ Item {
 
     anchors.fill: parent
 
-    property real mVolume: 0
-    property string mSource: ""
-    property real videoAspect: 16/9
-    property real containerAspect: width / height
-    property real scaledVideoWidth: containerAspect > videoAspect ? height * videoAspect : width
-    property real scaledVideoHeight: containerAspect > videoAspect ? height : width / videoAspect
+    property real pVolume: 1
+    property string pSource: ""
     property bool pAvailable: false
     property bool pVisited: false
 
@@ -21,84 +17,94 @@ Item {
     visible: false
 
     VideoOutput {
-        id: mVideoOutput
+        id: iVideoOutput
 
         anchors.fill: parent
         fillMode: VideoOutput.PreserveAspectFit
     }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            stopVideo()
+            pVisited = true
+            mLoader.visible = false
+            sVideoEnd()
+            console.log("HERE 0", mLoader.visible)
+        }
+    }
 
     MediaPlayer {
-        id: mVideoMediaPlayer
+        id: iVideoMediaPlayer
 
-        source: mSource
-        videoOutput: mVideoOutput
+        source: pSource
+        videoOutput: iVideoOutput
         audioOutput: AudioOutput {
-            volume: mVolume
+            volume: pVolume
         }
-        onPlaybackStateChanged: {
+        onMediaStatusChanged: {
             if (mediaStatus === MediaPlayer.EndOfMedia) {
                 pVisited = true
-                visible = false
+                mLoader.visible = false
                 sVideoEnd()
+                console.log("HERE 1", mLoader.visible)
             }
         }
     }
 
-
     onVisibleChanged: {
         if (visible) {
-            mVideoMediaPlayer.play()
+            startVideo()
         } else {
-            mVideoMediaPlayer.stop()
+            stopVideo()
         }
     }
 
-
     function onInteract() {
         pVisited = true
-        sVideoEnd()
+        if (pSource) {
+            visible = true
+        } else {
+            sVideoEnd()
+        }
     }
 
     function startVideo(){
         setVideoPosition(0)
-        mVideoMediaPlayer.play()
+        iVideoMediaPlayer.play()
     }
     function stopVideo(){
-        mVideoMediaPlayer.stop()
+        iVideoMediaPlayer.stop()
     }
     function pauseVideo(){
-        mVideoMediaPlayer.pause()
+        iVideoMediaPlayer.pause()
     }
     function playVideo(){
-        mVideoMediaPlayer.play()
+        iVideoMediaPlayer.play()
     }
 
-    function getVideoOutputScale() {
-        return mVideoOutputScale
-    }
     function getVideoOutput() {
-        return mVideoOutput
+        return iVideoOutput
     }
     function getMediaPlayer() {
-        return mVideoMediaPlayer
+        return iVideoMediaPlayer
     }
 
 
     function getVideoState() {
-        return mVideoMediaPlayer.playbackState
+        return iVideoMediaPlayer.playbackState
     }
     function getVideoDuration() {
-        return mVideoMediaPlayer.duration
+        return iVideoMediaPlayer.duration
     }
 
     function getVideoSource() {
-        return mSource
+        return iVideoMediaPlayer.source
     }
     function getVideoPosition() {
-        return mVideoMediaPlayer.position
+        return iVideoMediaPlayer.position
     }
     function setVideoPosition(sPosition) {
-        mVideoMediaPlayer.position = sPosition
+        iVideoMediaPlayer.position = sPosition
     }
 }
 

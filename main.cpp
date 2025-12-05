@@ -2,6 +2,9 @@
 #include <FelgoApplication>
 
 #include <QQmlApplicationEngine>
+#include <QResource>
+#include <QFileInfo>
+#include <QDebug>
 
 // Uncomment this line to add Felgo Hot Reload and use hot reloading with your custom C++ code
 //#include <FelgoHotReload>
@@ -15,6 +18,19 @@ int main(int argc, char *argv[])
     // Use Felgo's default font instead of platform-specific fonts
     felgo.setPreservePlatformFonts(false);
 
+    const char* resourceList[] = {
+        "image_assets.rcc",
+    };
+
+    for (const char* file : resourceList) {
+        if (QResource::registerResource(QString(file))) {
+            qDebug() << "Succeded to register " + QString(file);
+        } else {
+            qDebug() << "Failed to register " + QString(file);
+        }
+    }
+
+    qputenv("QML_XHR_ALLOW_FILE_READ", QString("1").toUtf8());
     QQmlApplicationEngine engine;
     felgo.initialize(&engine);
 

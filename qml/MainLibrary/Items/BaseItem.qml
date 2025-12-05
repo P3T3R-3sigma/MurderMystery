@@ -1,38 +1,36 @@
 import QtQuick
 import Felgo
 
-import "../Interact"
+import "../../BaseLibrary"
 
-Rectangle {
+Item {
     id: baseItem
 
     property var pXYWH: [100, 100, 100, 100]
     property string pColor: pPickedUp ? "blue" : "red"
     property string pName: ""
+    objectName: pName
 
-    property real xPercent
-    property real yPercent
-    property real widthPercent
-    property real heightPercent
 
     property string pSource: ""
-    property string pDescription: "This is " + pSource
+    property string pCode: "ITEM" + pUse
+    property string pDescription: "This is " + pName + iImage.source
+    property int pUse: mConstants.mUseEnum.NOTHING
 
     property bool pEnabled: true
     property bool pPickedUp: false
+    property bool pNeeded: false
 
-    x: parent.width * xPercent
-    y: parent.height * yPercent
-    width:  parent.width * widthPercent
-    height: parent.height * heightPercent
 
-    color: "transparent"
     visible: !pPickedUp
 
+    width: iImage.implicitWidth
+    height: iImage.implicitHeight
 
-    AppImage {
+    BaseImage {
+        id: iImage
         anchors.fill: parent
-        source: pSource ? "../../../assets/Images/" + pSource : ""
+        pAssetCode: pCode
     }
 
     Rectangle {

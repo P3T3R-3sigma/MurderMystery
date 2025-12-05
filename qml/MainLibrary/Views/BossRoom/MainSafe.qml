@@ -9,16 +9,25 @@ BaseView {
     id: iMainSafe
 
     pImageSource: "MainSafe.png"
-    pBackView: mDeskOfHeart
 
-    MurderVideo {
-        id: mMurderVideo
-        xPercent: 0.5
-        yPercent: 0.7
-        widthPercent: 0.08
-        heightPercent: 0.08
+    BaseItem {
+        id: iMurderVideo
+
+        pXYWH: [1600, 850, 50, 50]
+
+        pName: "Video of Murder"
+        pUse: mConstants.mUseEnum.VIDEO_OF_MURDER
+
+        x: 1000
+        y: 800
+        width: 100
+        height: 100
+
+
+        function onPickUp() {
+            mConstants.murderVideoPickedUp = true
+        }
     }
-
 
 
 

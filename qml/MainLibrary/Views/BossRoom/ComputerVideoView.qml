@@ -10,22 +10,22 @@ Item {
 
     anchors.fill: parent
 
-    property real pStartXPercent: 0.136
-    property real pWidhtPercent: 0.226
-    property real pStartYPercent: 0.1388
-    property real pHeightPercent: 0.026
-    property real pSpaceXPercent: 0.0129
-    property real pSpaceYPercent: 0.0208
+    property real pStartX: 261
+    property real pWidth: 434
+    property real pStartY: 150
+    property real pHeight: 28
+    property real pSpaceX: 25
+    property real pSpaceY: 22.5
 
     Item {
-        x: pStartXPercent * parent.width
-        y: pStartYPercent * parent.height
+        x: pStartX
+        y: pStartY
         Row {
-            spacing: pSpaceXPercent * iComputerVideoView.width
+            spacing: pSpaceX
             Repeater {
                 model: 3
                 Column {
-                    spacing: pSpaceYPercent * iComputerVideoView.height
+                    spacing: pSpaceY
                     property int r1Index: index
                     Repeater {
                         model: 12
@@ -33,8 +33,8 @@ Item {
                         Rectangle {
                             id: navRect
 
-                            width: pWidhtPercent * iComputerVideoView.width
-                            height: pHeightPercent * iComputerVideoView.height
+                            width: pWidth
+                            height: pHeight
 
                             color: "lightpink"
                             opacity: 0

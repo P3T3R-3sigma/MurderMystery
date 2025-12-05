@@ -8,21 +8,22 @@ import "../../Items"
 BaseView {
     id: iAngelLocker
 
-    pImageSource: "LockerAngel.png"
-    pBackView: mLocker
+    BaseItem {
+        id: angelDiary
 
-    DiaryAngel {
-        xPercent: 0.5
-        yPercent: 0.6
-        widthPercent: 0.1
-        heightPercent: 0.1
+        pXYWH: [1500, 650, 50, 50]
+        pName: "Diary Angel"
+        pUse: mConstants.mUseEnum.ANGEL_DIARY
+
+        x: 1100
+        y: 650
+        width: 100
+        height: 100
+        function onPickUp() {
+            mConstants.diaryAngelPickedUp = true
+        }
     }
-    SideSafeGear {
-        xPercent: 0.7
-        yPercent: 0.57
-        widthPercent: 0.1
-        heightPercent: 0.1
-    }
+
 }
 
 

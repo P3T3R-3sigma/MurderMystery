@@ -9,21 +9,27 @@ BaseView {
     id: iSideSafe
 
     pImageSource: "SafeOnTheWall.png"
-    pBackView: mPictureOnWall
 
-    KeyRed {
-        xPercent: 0.5
-        yPercent: 0.3
-        widthPercent: 0.05
-        heightPercent: 0.05
-    }
-    BlackMailVideo {
-        xPercent: 0.4
-        yPercent: 0.3
-        widthPercent: 0.05
-        heightPercent: 0.05
 
+    BaseItem {
+        id: iBlackMailVideo
+
+        pXYWH: [1400, 650, 50, 50]
+
+        pName: "Retirement plan"
+        pUse: mConstants.mUseEnum.RETIREMENT_PLAN
+
+        x: 1050
+        y: 600
+        width: 100
+        height: 100
+
+        function onPickUp() {
+            mConstants.blackMailVideoPickedUp = true
+        }
     }
+
+
 
 
 

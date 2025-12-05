@@ -7,7 +7,7 @@ BaseCharacter {
 
     visible: true
 
-    pXYWH: [1150, 300, 200, 200]
+    pXYWH: [595, 550, 80, 100]
     pColor: "red"
     pName: "Heart"
 
@@ -16,18 +16,20 @@ BaseCharacter {
 
     BasicVideo {
         id: iHeartVideo1
-        objectName: "Heart: First meeting"
+        objectName: "Heart: No Video"
         pAvailable: true
     }
     BasicVideo {
         id: iHeartVideo2
         objectName: "Heart: Missing Key"
         pAvailable: mConstants.videoMissing
+        pSource: "../../../assets/testVideo/C10_Alex-Hearts-Milan - Vault.mp4"
     }
     BasicVideo {
         id: iHeartVideo3
         objectName: "Heart: Confront"
         pAvailable: mConstants.blackMailVideoPickedUp
+        pSource: "../../../assets/testVideo/C11_Blackmailing.mp4"
     }
     BasicVideo {
         id: iHeartVideo4

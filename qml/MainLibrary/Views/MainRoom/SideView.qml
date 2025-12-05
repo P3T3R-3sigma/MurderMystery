@@ -14,28 +14,27 @@ BaseView {
     pBackView: mMainRoom
 
     NavigationRect {
-        xPercent: 0.05
-        yPercent: 0.065
-        widthPercent: 0.185
-        heightPercent: 0.55
+        pXYWH: [90, 70, 360, 595]
+
         functionOnClicked: function() {startFadeOut(mVIP_Alcove) }
     }
     NavigationRect {
-        xPercent: 0.795
-        yPercent: 0.1
-        widthPercent: 0.125
-        heightPercent: 0.52
+        pXYWH: [1530, 110, 235, 550]
+
         functionOnClicked: function() {startFadeOut(mMakeUpRoom) }
     }
 
     NavigationRect {
-        xPercent: 0.305
-        yPercent: 0.63
-        widthPercent: 0.065
-        heightPercent: 0.11
+        pXYWH: [588, 680, 117, 122]
+
         visible: mConstants.candeeDropedTheKey && !mConstants.greenKeyPickedUp
-        pEnabled: mConstants.magnetHookPickedUp
-        functionOnClicked: function() {mMagnetGame.startFadeIn() }
+        functionOnClicked: function() { iPopUp.visible = true }
+    }
+
+    PopUpField {
+        id: iPopUp
+        pText: "Can't reach!"
+        z: 10
     }
 
     Candee { id: mCandee }
@@ -46,6 +45,17 @@ BaseView {
     }
 
     MagnetGame { id: mMagnetGame }
+
+
+    function shadowUseItem(item) {
+        if (item.pUse === mConstants.mUseEnum.MAGNETHOOK &&  mConstants.candeeDropedTheKey) {
+            mInventory.removeItem(mConstants.mUseEnum.MAGNETHOOK)
+            mInventory.close()
+            mMagnetGame.startFadeIn()
+            return true
+        }
+        return false
+    }
 
     Component.onCompleted: mPlaceManager.addPlace(this)
 

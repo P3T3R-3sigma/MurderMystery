@@ -3,7 +3,6 @@ import QtQuick
 
 import "Physics"
 import "Objects"
-import "../../Items"
 
 Item {
     id: iMagnetGame
@@ -12,6 +11,8 @@ Item {
     visible: false
 
     property var obstacle: []
+    property var windTunel: []
+    property int pDir: 0
     property bool stuck: false
     property bool gotKey: false
 
@@ -46,6 +47,17 @@ Item {
                 stuck = true
             }
         }
+        for (let j in windTunel) {
+            if (windTunel[j].collide(blob)) {
+                if (windTunel[j].windDir) {
+                    pDir = 1
+                } else {
+                    pDir = -1
+                }
+                return
+            }
+        }
+        pDir = 0
     }
     function win() {
         if (mWinObject.collide(blob)) {
@@ -54,12 +66,14 @@ Item {
                 this.visible = false
                 physicsTimer.stop()
                 mKeyGreen.pickUp()
+                mInventory.removeItem(mConstants.mUseEnum.MAGNETHOOK)
             }
         }
 
         if (mKey.collide(blob)) {
             blob.color = "gold"
             gotKey = true
+            mKey.visible = false
         }
     }
 
@@ -87,23 +101,21 @@ Item {
     KeyObject {
         id: mKey
         x: 900
-        y: 900
+        y: 920
         width: 30
         height: 30
         radius: 15
     }
 
-    Obstacles { pXYWH: [900, 700, 20, 180] }
-    Obstacles { pXYWH: [900, 700, 200, 20] }
-    Obstacles { pXYWH: [1000, 800, 20, 200] }
-    Obstacles { pXYWH: [1000, 800, 20, 200] }
-    Obstacles { pXYWH: [600, 400, 200, 20] }
-    Obstacles { pXYWH: [700, 700, 20, 200] }
-    Obstacles { pXYWH: [600, 300, 20, 200] }
-    Obstacles { pXYWH: [700, 600, 200, 20] }
-    Obstacles { pXYWH: [1300, 200, 20, 200] }
-    Obstacles { pXYWH: [1100, 500, 200, 20] }
-    Obstacles { pXYWH: [900, 400, 200, 20] }
+    Obstacles { pXYWH: [1000, 400, 500, 20] }
+    Obstacles { pXYWH: [700, 550, 400, 20] }
+    WindObject { pXYWH: [parent.width*0.3, parent.height * 0.4, parent.width*0.4, parent.height * 0.1]; windDir: true }
+    Obstacles { pXYWH: [900, 550, 20, 120] }
+    Obstacles { pXYWH: [700, 770, 200, 20] }
+    Obstacles { pXYWH: [1000, 770, 200, 20] }
+    WindObject { pXYWH: [parent.width*0.3, parent.height * 0.6, parent.width*0.4, parent.height * 0.1]; windDir: false }
+    Obstacles { pXYWH: [250, 950, 1500, 200] }
+
     Obstacles { pXYWH: [0, 0, parent.width*0.3, parent.height] }
     Obstacles { pXYWH: [parent.width*0.7, 0, parent.width*0.3, parent.height] }
 
